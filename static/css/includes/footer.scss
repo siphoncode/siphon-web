@@ -1,0 +1,73 @@
+
+@import 'responsive';
+@import 'mixins';
+
+.footer {
+    border-top: 1px solid #dcdcdc;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 24px;
+    margin-top: 80px;
+    overflow: auto; // clearfix
+
+    @include mobile-only {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    & > div {
+        margin: 0 auto;
+        position: relative;
+        width: 960px;
+
+        @include mobile-only {
+            width: 100%;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        & > div {
+            float: left;
+            text-align: left;
+            padding-right: 74px;
+
+            @include mobile-only {
+                float: none;
+                padding: 0;
+            }
+        }
+    }
+
+    & a {
+        display: block;
+        font-size: 16px;
+        line-height: 32px;
+        color: #3a82cc;
+
+        &:hover {
+            opacity: 0.75;
+        }
+
+        @include mobile-only {
+            display: inline;
+            font-size: 18px;
+            padding-right: 18px;
+        }
+    }
+
+    & span {
+        display: block;
+        font-size: 17px;
+        color: #a0a0a0;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        @include mobile-only {
+            position: relative;
+            top: auto;
+            right: auto;
+            padding-top: 10px;
+        }
+    }
+}

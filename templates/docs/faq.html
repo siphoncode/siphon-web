@@ -1,0 +1,178 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}FAQ | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#what-is-this">What is this?</a>
+<a href="#what-can-i-do">What can I do?</a>
+<a href="#publishing">Publishing to the App Store or Google Play</a>
+<a href="#assets">Image assets</a>
+<a href="#logs-and-errors">Console logs and errors</a>
+<a href="#native-modules">Native modules</a>
+<a href="#third-party">Third-party libraries</a>
+<a href="#is-this-allowed">Are over-the-air updates allowed by Apple?</a>
+<a href="#android">Android support</a>
+<a href="#change-base-version">Change your app's base version</a>
+<a href="#display-name">Change your app's display name</a>
+<a href="#dot-siphonignore">Ignoring files</a>
+<a href="#permissions">Permissions</a>
+<a href="#over-the-air-updates">How do over-the-air updates work?</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Frequently Asked Questions</div>
+
+    <a name="what-is-this"></a>
+    <div class="docs__subheading">What is this?</div>
+    <p>Siphon is a new workflow for mobile app development. We believe that
+    despite the many recent advances in IDEs, languages and tooling, the
+    process of building native mobile apps is still far too clunky.</p>
+    <p>Siphon apps are written in JavaScript with the
+    <a href="https://facebook.github.io/react-native/">React Native</a> framework. Follow our
+    <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a> to get started.</p>
+
+    <a name="what-can-i-do"></a>
+    <div class="docs__subheading">What can I do?</div>
+    <p>Please refer to our <a href="{% url 'docs:quickstart' %}">quickstart</a> page to learn about Siphon's features.</p>
+
+    <a name="publishing"></a>
+    <div class="docs__subheading">How do I publish my app to the App Store and Google Play?</div>
+    <p>When you type in the <span class="docs__technical">siphon publish</span>
+    command we will ask you to enter your iOS developer account or Google Play publisher
+    account details. We then build, sign and package an app binary for you behind-the-scenes.</p>
+    <p>The app binary is submitted to the App Store or Google Play on your behalf. It will be listed under your own account name.</p>
+    <p>To make changes to an app that is already listed, you can
+    run <span class="docs__technical">siphon publish</span> again and we will
+    automatically detect whether the update can be issued over-the-air (usually) or if it requires
+    a new binary to be submitted.</p>
+    <p>Publishing requires a paid plan for commercial apps. Please refer to the <a href="{% url 'static:pricing' %}">pricing page</a> for more information.</p>
+
+    <a name="assets"></a>
+    <div class="docs__subheading">How do I use assets in my app?</div>
+    <p>Siphon supports the asset format recommended by React Native:</p>
+    {% include "docs/snippets/image-asset.html" %}
+    <p>You should place your assets in the app directory alongside your
+    JavaScript source files. Placing them in subdirectories is fine too.</p>
+    <p>When you run <span class="docs__technical">siphon push</span> we will process these assets and host them for you.
+    An end-user device will only download new or changed assets when it synchronises,
+    saving time and bandwidth.</p>
+    <div class="docs__content__help-section">
+        <span>
+            We recommend reading the
+            <a href="https://facebook.github.io/react-native/docs/images.html">
+                official React Native guide on images and assets
+            </a> for more information.
+        </span>
+    </div>
+
+    <a name="logs-and-errors"></a>
+    <div class="docs__subheading">How do I view console logs and errors?</div>
+    <p>Navigate to your app directory and type in <span class="docs__technical">siphon logs</span>. Logs and
+    error messages will be streamed from your device whenever this command is running.</p>
+
+    <a name="native-modules"></a>
+    <div class="docs__subheading">Native modules</div>
+    <p>In order for us to ensure that your app behaves the same across the sandbox, simulator and
+    developer devices we introduced a constraint: you can not link your own
+    custom <a href="https://facebook.github.io/react-native/docs/native-modules-ios.html">native modules</a> to a Siphon app.</p>
+    <p>This makes it possible for us to say that you never need to open Xcode or Android Studio to use Siphon. But you may be left wondering
+    how to use native functionality not provided by the React Native core library.</p>
+    <p>The good news is, we bundle lots of the <a href="{% url 'docs:base-version' %}">most popular native modules</a> for you behind-the-scenes.
+    You can use them in your apps straight away; simply reference them in your JavaScript code.</p>
+    <p><strong><a href="{% url 'docs:base-version' %}">See the list of available native modules</a></strong></p>
+    <p>Please <a href="mailto:hello@getsiphon.com">let us know</a> if there are any native modules that you need for your app, and
+    we will try to integrate them for everyone to use.</p>
+
+    <a name="third-party"></a>
+    <div class="docs__subheading">Third-party libraries</div>
+    <p>The app directory created by Siphon works like a typical Node.js project directory.
+    You can install suitable third-party modules using <span class="docs__technical">npm install</span>
+    and the command-line tool will push the <span class="docs__technical">node_modules</span> directory and bundle it with your app.</p>
+    <p>Please note that this only works for <strong>pure JavaScript</strong> libraries.
+    We do not (and will not for the foreseeable future) support custom native modules. However we do include
+    some <a href="{% url 'docs:base-version' %}">popular native modules</a> for you to use in your app.</p>
+    <p>Please <a href="mailto:hello@getsiphon.com">let us know</a> if there are any native modules that you need for your app, and
+    we will try to integrate them for everyone to use.</p>
+
+    <a name="is-this-allowed"></a>
+    <div class="docs__subheading">Are over-the-air updates allowed by Apple?</div>
+    <p>Yes. Because React Native apps are written in JavaScript we fall nicely under
+    <a href="https://developer.apple.com/programs/ios/information/iOS_Program_Information_4_3_15.pdf">Section 3.3.2</a>
+    of the iOS Developer Program agreement. Hot pushes are explicitly allowed in this case.</p>
+
+    <a name="android"></a>
+    <div class="docs__subheading">Can I build Android apps with Siphon?</div>
+    <p>Yes! You can run them in the Siphon Sandbox app, which
+    is available on both Apple's <a href="https://getsiphon.com/i">App Store</a> and
+    Google's <a href="https://getsiphon.com/a">Play Store</a>.</ins></p>
+    <p>Emulator and device support for Android is coming soon.</p>
+
+    <a name="change-base-version"></a>
+    <div class="docs__subheading">Change your app's base version</div>
+    <p>When you first run the <span class="docs__technical">siphon create</span> command, we
+    automatically assign your app a special value called a <a href="{% url 'docs:base-version' %}">base version</a> behind the scenes.</p>
+    <p>It ties your app to a particular version of React Native and also guarantees that a certain set
+    of native modules are available to be referenced within your app's JavaScript code.</p>
+    <p><a href="{% url 'docs:base-version' %}#changing-base-version">How to change your app's base version</a></p>
+
+    <a name="display-name"></a>
+    <div class="docs__subheading">Change your app's display name</div>
+    <p>By default, when you run or publish your app standalone (i.e. outside of the sandbox) it will appear
+    with the app's internal name on the home screen.
+    <p>For example, if you typed <span class="docs__technical">siphon create my-app</span> when you first
+    initialised the app, the text that appears under the app icon will say <strong>my-app</strong>.</p>
+    <p>To change this behaviour, edit the file named <span class="docs__technical">Siphonfile</span> in the
+    app directory and add a <span class="docs__technical">display_name</span> key, so that it looks
+    like something like this:</p>
+    {% include "docs/snippets/display-name.html" %}
+    <p>Finally, run a <span class="docs__technical">siphon push</span> to reflect the change. If your app is already listed on the App Store or Play Store, you will need to run <span class="docs__technical">siphon publish</span> again to change its display name.</p>
+    <div class="docs__content__help-section">
+        <span>
+            The <span class="docs__technical">display_name</span> key has a maximum length of 32 characters and can
+            contain any valid unicode characters. Please check the
+            App Store and Play Store rules before you publish to make sure that the chosen display name is acceptable.
+        </span>
+    </div>
+
+    <a name="dot-siphonignore"></a>
+    <div class="docs__subheading">Ignoring files</div>
+    <p>
+      By default, your app directory will include a <span class="docs__technical">.siphonignore</span> file.
+      This file is used by the Siphon client to decide which files in your app directory it
+      should ignore when pushing your app or running it on the simulator.
+    </p>
+    <p>
+      The <span class="docs__technical">.siphonignore</span> file uses the following rules:
+    </p>
+    {% include "docs/snippets/dot-siphonignore.html" %}
+    <p>
+      Many Node.js modules are ignored by default to improve compatibility with existing React Native apps.
+      If you wish to use one in your app that is being ignored, you can
+      delete the corresponding entry in the <span class="docs__technical">.siphonignore</span> file.
+    </p>
+
+    <a name="permissions"></a>
+    <div class="docs__subheading">Permissions</div>
+    <p>Due to the nature of iOS and the way in which we allow you to run
+    multiple apps in the sandbox, we have to be careful about apps
+    requesting permissions (e.g. camera access, geolocation).</p>
+    <p>For example, the <span class="docs__technical">Geolocation</span> API currently returns dummy GPS
+    coordinates when your app runs in the sandbox.</p>
+
+    <a name="over-the-air-updates"></a>
+    <div class="docs__subheading">How do over-the-air updates work?</div>
+    <p>For the vast majority updates (i.e. those that do not require a new version of React Native) we let
+    you push changes to your users without going through the App Store approval process each time.</p>
+    <p>A user's device checks for updates when the app first loads, or when it enters the foreground
+    after a set period of inactivity. Any problems communicating over the network are hidden from the user;
+    the app will simply try to update itself again next time it enters the foreground.</p>
+    <p>To make this process fast and efficient, we generate diffs when your app bundle changes
+    (i.e. when the app's JavaScript source code is modified) so that only the minimum needs to be sent over the network.
+    It should typically take less than 5 seconds for most network connections.</p>
+    <p>In the case of images and other assets, we cache these on the user's device so that
+    only new or changed assets need to be fetched over the network.</p>
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/FAQ');
+</script>
+{% endblock %}

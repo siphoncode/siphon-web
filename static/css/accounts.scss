@@ -1,0 +1,152 @@
+
+@import 'includes/mixins';
+
+.footer {
+    display: none;
+}
+
+html {
+    min-height: 100%; // needed for background image
+}
+
+body {
+    width: 100%; // needed for background image
+    height: 100%;
+    background-color: #545c67; // fallback
+    background-image: url('/static/img/accounts/mountains.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@mixin modal {
+    background: white;
+    width: 328px;
+    border-radius: 8px;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    padding-left: 42px;
+    padding-right: 42px;
+
+    // Centering hack
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    input {
+        @include font('regular');
+        @include box-sizing;
+        display: block;
+        font-size: 22px;
+        width: 100%;
+        color: #a7a7a7;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 6px;
+        border: 1px solid #b7b7b7;
+        margin-bottom: 18px;
+    }
+}
+
+@mixin modal-heading {
+    @include font('regular');
+    font-size: 36px;
+    color: #5d5d5d;
+    margin-bottom: 22px;
+}
+
+@mixin modal-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #dadada;
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
+
+@mixin modal-error {
+    @include font('regular');
+    display: block;
+    color: #bd1919;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+@mixin modal-submit {
+    @include font('semibold');
+    display: block;
+    text-align: center;
+    background-color: #6a90ab;
+    color: white;
+    border-radius: 6px;
+    font-size: 22px;
+    padding: 6px;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.login-logo, .register-logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    :hover {
+        opacity: 0.85;
+    }
+}
+
+//##############################################################################
+// Register
+//##############################################################################
+
+.register {
+    @include modal;
+}
+
+.register__heading {
+    @include modal-heading;
+}
+
+.register__error {
+    @include modal-error;
+}
+
+.register__divider {
+    @include modal-divider;
+}
+
+.register__submit {
+    @include modal-submit;
+}
+
+//##############################################################################
+// Login
+//##############################################################################
+
+.login {
+    @include modal;
+
+    input[name=password] {
+        margin-bottom: 26px;
+    }
+}
+
+.login__heading {
+    @include modal-heading;
+}
+
+.login__error {
+    @include modal-error;
+}
+
+.login__submit {
+    @include modal-submit;
+}
+
+.login__footnote {
+    display: block;
+    margin-top: 20px;
+}

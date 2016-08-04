@@ -1,0 +1,52 @@
+{% load compress static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Siphon{% endblock %}</title>
+    <link rel="apple-touch-icon" href="{% static "img/apple-touch-icon.png" %}" />
+    <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" sizes="32x32" />
+    {% compress css %}
+    <link rel="stylesheet" type="text/css" href="{% static "lib/normalize.css" %}" />
+    <link rel="stylesheet" type="text/x-scss" href="{% static "css/main.scss" %}" />
+    {% endcompress %}
+    {% compress css %}
+    {% block css %}{% endblock %}
+    {% endcompress %}
+    {% include "includes/analytics.html" %}
+  </head>
+  <body>
+      <div class="shutdown">
+          <span class="shutdown__headline">Siphon is shutting down on 27th July 2016.</span>
+          <span class="shutdown__text">
+              <strong>To our customers, users and supporters:</strong> unfortunately this is the end of the road for Siphon. Our long-term goal was to create the most developer friendly end-to-end publishing platform for mobile apps.
+              <br /><br />Due to some inherent limitations in the early design decisions that we made (in particular the inability to compile your own native modules with Siphon) we have come to the regrettable conclusion that this vision is not possible at this time. We hoped that these native bridged modules would mature and become less important over time, but this has turned out to not be the case.
+              <br /><br />All apps created using Siphon are fully compatible with the standard React Native framework and transferring your app should only take a few minutes.
+              Please <a href="mailto:hello@getsiphon.com" style="color: white;"><strong>email us</strong></a> if you need any help migrating your app.
+              <br /><br /><strong>Thanks to everyone who supported us over the past few months.</strong>
+          </span>
+      </div>
+    {% block content %}{% endblock %}
+    <div class="footer">
+        <div>
+            <div>
+                <a href="/">Home</a>
+                <a href="/blog/">Blog</a>
+                <a href="{% url 'static:pricing' %}">Pricing</a>
+            </div>
+            <div>
+                <a href="{% url 'docs:index' %}">Docs</a>
+                <a href="{% url 'static:terms-of-use' %}">Terms of Use</a>
+                <a href="{% url 'static:privacy-policy' %}">Privacy Policy</a>
+            </div>
+            <div>
+                <a href="https://twitter.com/getsiphon" style="font-weight: bold;">Twitter</a>
+                <a href="https://www.facebook.com/getsiphon" style="font-weight: bold;">Facebook</a>
+                <a href="{% url 'static:contact' %}">Contact us</a>
+            </div>
+            <span>&copy; Siphon</span>
+        </div>
+    </div>
+  </body>
+</html>

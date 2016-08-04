@@ -1,0 +1,21 @@
+
+// Mixins
+
+@mixin mobile-only {
+    @media all and (max-width: 960px) {
+        @content;
+    }
+}
+
+// Global overrides
+
+@media all and (max-width: 960px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  video, canvas {
+    max-width: 100%; // scale down properly on mobile
+  }
+}

@@ -1,0 +1,15 @@
+Django==1.9.2
+djangorestframework==3.3.2
+psycopg2==2.6.1
+uWSGI==2.0.11.2
+ipython==4.0.0
+virtualenv==13.1.2
+pika==0.10.0
+django-compressor==2.0
+django-libsass==0.6
+rsa==3.2.3
+django-mailgun==0.8.0
+requests==2.9.1
+tinys3==0.1.11
+-e git+https://github.com/getsiphon/django-drip.git@3a400f7#egg=django-drip
+arrow==0.7.0

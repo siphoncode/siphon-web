@@ -1,0 +1,17 @@
+Your app is now available on iTunes Connect.
+
+Please visit https://itunesconnect.apple.com, log in and click on 'My Apps'. Your app will be visible on the main screen.
+
+Click on the your app's icon or name to view the 'App Information' page. Select a category for your app from the drop-down menu, specify a rating and enter a privacy policy URL if you have one.
+
+If you navigate to the 'Pricing and Availability' section by clicking the link in the navigation menu you may configure the availability and pricing of your app.
+
+Now click on your app's link under the 'iOS App' heading in the left-hand navigation bar. You will need to provide a description of your app, screenshots and some contact information. Please note that Apple requires at least one screenshot for each of the device sizes. Screenshots can be obtained by using the simulator via the 'develop' command of Siphon's command line client.
+
+When you are ready, select a release type from the list at the bottom of the page and submit your app.
+
+If you have any queries, please don't hesitate to get in touch or reply to this email.
+
+Best wishes,
+
+The Siphon Team

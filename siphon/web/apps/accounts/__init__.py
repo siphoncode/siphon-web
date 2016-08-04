@@ -1,0 +1,1 @@
+default_app_config = 'siphon.web.apps.accounts.apps.AccountsConfig'

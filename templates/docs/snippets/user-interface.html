@@ -1,0 +1,55 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+&#x27;use strict&#x27;;
+
+var React = require(&#x27;react-native&#x27;);
+var {
+  AppRegistry,
+  Text,
+  TextInput,
+  ScrollView,
+  View
+} = React;
+
+var App = React.createClass({
+  getInitialState: function() {
+    return {
+      messages: []
+    }
+  },
+  handleSubmit: function(event) {
+    // Does nothing yet.
+  },
+  render: function() {
+    return (
+      &#x3C;View style={{paddingTop: 20}}&#x3E;
+        &#x3C;TextInput
+          ref=&#x27;textInput&#x27;
+          autoCapitalize=&#x27;none&#x27;
+          autoCorrect={ false }
+          placeholder=&#x27;Enter a chat message...&#x27;
+          returnKeyType=&#x27;send&#x27;
+          style={{
+            height: 40,
+            borderColor: &#x27;gray&#x27;,
+            borderWidth: 1,
+            margin: 10,
+            padding: 5
+          }}
+          onSubmitEditing={this.handleSubmit.bind(this)}
+        /&#x3E;
+        &#x3C;ScrollView style={{height: 400}}&#x3E;
+          {
+            this.state.messages.map(m =&#x3E; {
+              return &#x3C;Text style={{margin: 10}}&#x3E;{m}&#x3C;/Text&#x3E;
+            })
+          }
+        &#x3C;/ScrollView&#x3E;
+      &#x3C;/View&#x3E;
+    );
+  }
+});
+
+AppRegistry.registerComponent(&#x27;App&#x27;, () =&#x3E; App);
+</code></pre>
+{% endverbatim %}

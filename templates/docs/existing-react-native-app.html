@@ -1,0 +1,102 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}How to turn an existing React Native app into a Siphon app | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#convert-app">Converting your React Native app</a>
+<a href="#register-app">Register your app</a>
+<a href="#troubleshooting">Troubleshooting</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">How to turn an existing React Native app into a Siphon app</div>
+    <p>It is now easy to develop and publish existing React Native apps using Siphon.</p>
+    <p>
+      We'll assume you have already created a React Native app by following the instructions
+      <a href="https://facebook.github.io/react-native/docs/getting-started.html#content">here</a>, and
+      have installed the Siphon command-line client. Please follow  the
+      <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a> first if
+      you haven't yet set up your machine to use Siphon.
+    </p>
+    <div class="docs__content__help-section">
+        <span>
+          If you have not yet created a React Native app and wish to use Siphon, please follow
+          the instructions in our <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a>.
+        </span>
+    </div>
+    <a name="convert-app"></a>
+    <div class="docs__subheading">Converting your React Native app</div>
+    <p>
+      First, navigate to your React Native project directory. You can now convert
+      this project into a Siphon app by running the
+      <span class="docs__technical">siphon create</span> command without any arguments:
+    </p>
+    <div class="docs__code" style="display: inline-block;"><span>$ </span>siphon create</div>
+    <p>
+      You will be prompted to give your Siphon app a name, which may be different to or the same as
+      the name of your React Native app project.
+    </p>
+    <p>
+      Your app will then be pushed to our servers. A <span class="docs__technical">Siphonfile</span> file,
+      <span class="docs__technical">.siphon</span> file, and <span class="docs__technical">.siphonignore</span>
+      file will also be added to this directory.
+    </p>
+    <div class="docs__content__help-section">
+        <span>
+          <a href="{% url 'docs:faq' %}#dot-siphonignore">Learn more</a> about
+          the <span class="docs__technical">.siphonignore</span> file in our FAQ.
+        </span>
+    </div>
+    <a name="register-app"></a>
+    <div class="docs__subheading">Register your app</div>
+    <p>
+      In order to run your Siphon app you will need to modify the entry file(s) of your app.
+      The default entry files for a React Native app are named <span class="docs__technical">index.ios.js</span>
+      and <span class="docs__technical">index.android.js</span>, and specify the entry points of your app
+      for iOS and Android respectively.
+    </p>
+    <p>
+      In each of these files the root component of the app is registered via the
+      <span class="docs__technical">AppRegistry</span> object. You will need
+      to change the app key to <span class="docs__technical">'App'</span>. For
+      example:
+    </p>
+    {% include "docs/snippets/existing-react-native-app/app-registry-react-native.html" %}
+    <p>Should be changed to:</p>
+    {% include "docs/snippets/existing-react-native-app/app-registry-siphon.html" %}
+    <p>
+      Where <span class="docs__technical">MyReactNativeApp</span> is the root
+      component of your app (you can that anything you like).
+    </p>
+    <a name="troubleshooting"></a>
+    <div class="docs__subheading">Troubleshooting</div>
+
+    <p><strong>Import errors</strong></p>
+    <p>
+      By default, Siphon will ignore all node modules that are installed when a React Native
+      is initialized in addition to those that are already bundled with Siphon.
+    </p>
+    <p>
+      If you are having trouble importing a pure JavaScript dependency in your Siphon app,
+      please check your app's <span class="docs__technical">.siphonignore</span>
+      file and delete the corresponding entry if it exists.
+    </p>
+
+    <p><strong>File not found: Requiring 'react' from...</strong></p>
+    <p>
+      If your React Native project uses React Native version 0.25 or higher,
+      you may encounter this error when pushing your app.
+
+      Until a compatible Siphon <a href="{% url 'docs:base-version' %}">base version</a> is available
+      you will have to modify your project to import <span class="docs__technical">react</span>
+      components from <span class="docs__technical">react-native</span>. For example:
+    </p>
+    {% include "docs/snippets/existing-react-native-app/require-react-component-new.html" %}
+    <p>Should be replaced with:</p>
+    {% include "docs/snippets/existing-react-native-app/require-react-component-old.html" %}
+    <p>Learn more about how base versions work <a href="{% url 'docs:base-version' %}">here</a>.</p>
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/ExistingReactNativeApp');
+</script>
+{% endblock %}

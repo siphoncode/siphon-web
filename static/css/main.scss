@@ -1,0 +1,65 @@
+
+@import 'includes/fonts';
+@import 'includes/mixins';
+
+$text-color: #4d4d4d;
+
+html, html a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+body {
+  background-color: white;
+  color: $text-color;
+  font-size: 18px;
+  @include font('regular');
+}
+
+a {
+    color: #387dc4;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+}
+
+// Disable border added by Chrome on focus
+textarea:focus, input:focus {
+  outline: 0;
+}
+
+a, a:hover, a:focus {
+  text-decoration: none;
+}
+
+@import 'includes/responsive';
+
+.shutdown {
+  background: blue; color: white; text-align: center; padding: 40px; border-bottom: 1px solid black;
+
+  @include mobile-only {
+      padding: 40px;
+
+  }
+}
+
+.shutdown__headline {
+    font-size: 2em;
+    @include mobile-only {
+        font-size: 1.5em;
+    }
+}
+
+.shutdown__text {
+    width: 600px; display: block; margin: 0 auto;
+    padding-top: 20px;
+    line-height: 26px;
+    @include mobile-only {
+        width: 100%;
+    }
+}
+
+@import 'includes/header';
+@import 'includes/footer';

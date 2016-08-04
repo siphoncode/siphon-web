@@ -1,0 +1,18 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+parseVideos: function(s) {
+  console.log(&#x27;Parsing the feed...&#x27;);
+  var doc = new DOMParser().parseFromString(s, &#x27;text/xml&#x27;);
+  var objs = [];
+  var videos = doc.getElementsByTagName(&#x27;yt:videoId&#x27;);
+  var thumbs = doc.getElementsByTagName(&#x27;media:thumbnail&#x27;);
+  for (var i=0; i &#x3C; videos.length; i++) {
+    objs.push({
+      id: videos[i].textContent,
+      thumbnail: thumbs[i].getAttribute(&#x27;url&#x27;)
+    })
+  }
+  this.setState({videos: objs});
+},
+</code></pre>
+{% endverbatim %}

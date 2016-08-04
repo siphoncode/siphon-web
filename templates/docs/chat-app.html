@@ -1,0 +1,117 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Build a real-time chat app with Siphon | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#create-app">Create a new Siphon app</a>
+<a href="#add-user-interface">Add a simple user interface</a>
+<a href="#websocket">Receiving chat messages with a websocket</a>
+<a href="#mutating-state">Mutating state with incoming chat messages</a>
+<a href="#sending-messages">Sending chat messages</a>
+<a href="#next-up">Next up</a>
+<a href="#"></a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Build a real-time chat app with Siphon</div>
+    <p>We're going to build a simple real-time chat application using React Native.
+    Follow the <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a> first if
+    you haven't yet set up your machine to use Siphon.</p>
+
+    <p><a class="docs__content__button" href="{% url 'docs:quickstart' %}">Install the command-line tool</a></p>
+
+    <a name="create-app"></a>
+    <div class="docs__subheading">Create a new Siphon app</div>
+    <p>Navigate to a suitable directory (anywhere is fine) and type the following
+    command to create a new app:</p>
+    <div class="docs__code"><span>$ </span>siphon create chat-app</div>
+    <p>You can call it anything you like, but for the rest of this tutorial we will refer to the app as <strong>chat-app</strong>.</p>
+    <p>A new directory containing the basic app template will be created on your local machine and the files will be pushed to our servers.</p>
+    <p>Open up the <a href="/a" target="_blank">Siphon Sandbox</a> app on your iOS device and <strong>tap the new app icon</strong> to run it.</p>
+    <div class="docs__content__help-section">
+        <span>
+            The app directory works like a typical Node.js project directory; you can install <br />
+            suitable third-party modules using <span class="docs__technical">npm install</span>
+            and the command-line tool will push the <span class="docs__technical">node_modules</span> directory and bundle it with your app.
+        </span>
+    </div>
+
+    <a name="add-user-interface"></a>
+    <div class="docs__subheading">Add a simple user interface</div>
+    <p>We're going to alter the template app that we just created. Open up the file called
+    <span class="docs__technical">chat-app/index.js</span> in your favourite editor.</p>
+    <p>Lets add a minimal user interface ready for sending and receiving chat messages.
+    Remove the contents of that file and paste in the following code:</p>
+    {% include "docs/snippets/user-interface.html" %}
+    <p>Later we'll use a websocket to connect to the server
+    and append incoming messages to the <span class="docs__technical">messages</span> state, but
+    for now the UI is going to look quite empty.</p>
+    <p>Save the file and push your changes to Siphon:</p>
+    <div class="docs__code"><span>$ </span>siphon push</div>
+    <p>The app will reload itself and you should see something like this:</p>
+    <img class="docs__content__chat-ui-image" src="{% static "img/docs/chat-app/screenshot-only-ui.png" %}" width="254" height="450" />
+
+    <a name="websocket"></a>
+    <div class="docs__subheading">Receiving chat messages with a websocket</div>
+    <p>We're going to use the <span class="docs__technical">WebSocket</span> class
+    provided by React Native to send and receive chat messages.</p>
+    <p>First we will only log incoming messages to the console. Add these two methods to your
+    <span class="docs__technical">App</span> class definition:</p>
+    {% include "docs/snippets/websocket.html" %}
+    <p>After the <span class="docs__technical">App</span> component gets rendered, its going to
+    open up a socket and start printing incoming messages to the console.</p>
+    <p>Open up a separate terminal window and leave it streaming the logs from your app:</p>
+    <div class="docs__code">
+        <span>$ </span>cd chat-app<br />
+        <span>$ </span>siphon logs
+    </div>
+    <p>Now save the file and switch back to the other terminal window to push the changes:</p>
+    <div class="docs__code"><span>$ </span>siphon push</div>
+    <p>You should see some log output in the new terminal window. If there are other Siphon users
+    currently chatting, you may see some incoming messages in the logs.</p>
+    <div class="docs__content__help-section">
+        <span>
+            We set up a shared Node.js chat server at <span class="docs__technical">siphon-chat.herokuapp.com</span>.
+            When you've finished the app, you get to chat to everyone else taking this tutorial too!
+        </span>
+    </div>
+
+    <a name="mutating-state"></a>
+    <div class="docs__subheading">Mutating state with incoming chat messages</div>
+    <p>Let's make a small change so that incoming chat messages are displayed in the UI.
+    Replace the definition of <span class="docs__technical">componentDidMount</span> with this one:</p>
+    {% include "docs/snippets/mutate-state.html" %}
+    <p>Push your changes and run the app in the sandbox:</p>
+    <div class="docs__code"><span>$ </span>siphon push</div>
+    <p>Any incoming chat messages will now be displayed visually.</p>
+
+    <a name="sending-messages"></a>
+    <div class="docs__subheading">Sending chat messages</div>
+    <p>Lets hook up the <span class="docs__technical">&#x3C;TextInput&#x3E;</span> component so that it
+    broadcasts its contents to the chat server when we hit send.</p>
+    <p>Replace the empty definition of <span class="docs__technical">handleSubmit</span> with this one:</p>
+    {% include "docs/snippets/handle-submit.html" %}
+    <p>Now when you hit send, it sends the message across the websocket that we created earlier and then
+    clears the contents of the <span class="docs__technical">&#x3C;TextInput&#x3E;</span>.</p>
+    <p>Push your changes and open the app. It should look like this:</p>
+    <img class="docs__content__chat-ui-image" src="{% static "img/docs/chat-app/screenshot-full.png" %}" width="254" height="450" />
+    <div class="docs__content__help-section">
+        <span>
+            Complete source code for this app is
+            <a href="https://github.com/getsiphon/siphon-chat" target="_blank">available on GitHub</a>.
+        </span>
+    </div>
+    <p>That's the end of the tutorial, thanks for following along.</p>
+
+    <a name="next-up"></a>
+    <div class="docs__subheading">Next up</div>
+    <p class="docs__content__next-buttons">
+        <a class="docs__content__next-button" href="{% url 'docs:youtube-browser' %}">Build a YouTube browser</a>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}">FAQs</a>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}#publishing">How to publish an app</a>
+    </p>
+    <script type="text/javascript">
+        mixpanel.track('Web: Docs/Chat');
+    </script>
+{% endblock %}

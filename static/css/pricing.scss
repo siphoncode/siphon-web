@@ -1,0 +1,451 @@
+
+@import 'includes/mixins';
+@import 'includes/responsive';
+@import 'includes/buttons';
+
+@mixin headline-font {
+    font-family: Helvetica, 'helvetica', 'arial', sans-serif;
+}
+
+$faq-width: 960px;
+
+.pricing {
+    width: 100%;
+    color: white;
+    text-align: center;
+    overflow: auto;
+
+    background-color: #131318; // fallback
+    background-image: url('/static/img/blurred-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pricing__headline {
+    @include headline-font;
+    display: block;
+    color: white;
+    font-size: 38px;
+    margin-top: 125px;
+
+    @include mobile-only {
+        font-size: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 60px;
+    }
+}
+
+.pricing__offer {
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 300px;
+    background: rgba(245, 176, 127, 0.1);
+    border: 2px solid rgba(245, 176, 127, 1);
+    border-radius: 8px;
+    padding: 10px;
+
+    & span {
+        display: block;
+        padding-bottom: 6px;
+        font-size: 1.1em;
+    }
+
+    & a {
+        color: #f5b07f;
+    }
+
+    & a:hover {
+        opacity: 0.7;
+    }
+
+    @include mobile-only {
+        width: 60%;
+        max-width: 300px;
+        margin-top: 40px;
+
+        & br {
+            display: none;
+        }
+    }
+}
+
+.pricing__headline {
+    margin-top: 80px;
+
+    @include mobile-only {
+        margin-top: 40px;
+    }
+}
+
+// -----------
+
+.pricing__subheading {
+    @include headline-font;
+    padding-top: 6px;
+    display: block;
+    color: white;
+    opacity: 0.4;
+    font-size: 27px;
+
+    @include mobile-only {
+        font-size: 24px;
+        padding-top: 18px;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+//##############################################################################
+// Switch
+//##############################################################################
+
+$grid-plan-width: 255px;
+$grid-width: $grid-plan-width * 3;
+
+$switch-height: 28px;
+
+.pricing__switch-container {
+    width: $grid-width;
+    margin: 0 auto;
+    margin-top: 80px;
+    text-align: right;
+    opacity: 0.5; // jQuery removes this on load
+
+    @include mobile-only {
+        margin-top: 40px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.pricing__switch {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    height: $switch-height;
+    overflow: hidden;
+
+    & > span {
+        @include not-selectable;
+        cursor: pointer;
+        display: inline-block;
+        color: #dddddd;
+        font-size: 13px;
+        line-height: $switch-height;
+        padding-left: 8px;
+        padding-right: 8px;
+
+        &:hover {
+            color: #9e9e9e;
+        }
+    }
+
+    & > span:last-child {
+        margin-left: -5px;
+    }
+}
+
+.pricing__switch__active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+//##############################################################################
+// Grid
+//##############################################################################
+
+.pricing__grid {
+    width: $grid-width;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+    border-radius: 6px;
+
+    & > div {
+        float: left;
+        width: $grid-plan-width;
+        background: white;
+
+        @include mobile-only {
+            float: none;
+            width: 100%;
+            margin-top: 25px;
+        }
+    }
+
+    @include mobile-only {
+        width: 100%;
+        border-radius: 0;
+    }
+}
+
+// Applies to all plans
+.pricing__grid-plan {
+    // Header
+    & > div:first-child {
+        height: 90px;
+        padding-top: 15px;
+        overflow: hidden;
+    }
+
+    // Content
+    & > div:last-child {
+        color: #8f8f8f;
+        border-right: 1px solid #dbdbdb;
+        font-size: 18px;
+        text-align: left;
+        height: 384px;
+        position: relative; // so that button can be absolutely positioned
+
+        & strong {
+            @include font('light');
+            color: darken(#8f8f8f, 5);
+        }
+
+        @include mobile-only {
+            height: auto;
+        }
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        & li {
+            padding-left: 22px;
+            padding-top: 18px;
+        }
+
+        & a {
+            color: #848484;
+            // Ridiculous underline hack!
+            padding-bottom: 2px;
+            background-image: linear-gradient(
+                180deg, rgba(0,0,0,0),
+                rgba(0,0,0,0) 81%,
+                #d2d1d1 81.1%,
+                #d2d1d1 85%,
+                rgba(0,0,0,0) 85.1%,
+                rgba(0,0,0,0)
+            );
+            text-decoration: none;
+        }
+    }
+}
+
+.pricing__grid-plan__title {
+    @include font('semibold');
+    color: white;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pricing__grid-plan__price {
+    font-size: 37px;
+    color: white;
+}
+
+.pricing__grid-plan__blurb {
+    font-size: 15px;
+    color: white;
+    opacity: 0.6;
+    width: 70px;
+    display: inline-block;
+    text-align: left;
+    margin-left: 3px;
+    line-height: 16px;
+}
+
+// Dev plan
+.pricing__grid-plan:nth-child(1) {
+    & > div:first-child {
+        background-color: #64bc2a;
+        border-right: 1px solid #48871e;
+    }
+}
+
+// Pro plan
+.pricing__grid-plan:nth-child(2) {
+    & > div:first-child {
+        background-color: #2496e5;
+        border-right: 1px solid #3a5d76;
+    }
+}
+
+// Organization plan
+.pricing__grid-plan:nth-child(3) {
+    & > div:first-child {
+        background-color: #446e8c;
+
+        .pricing__grid-plan__title {
+            margin-bottom: 16px;
+        }
+
+        & > img {
+            opacity: 0.2;
+            position: relative;
+            top: -4px;
+        }
+    }
+}
+
+.pricing__grid-plan__button {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+
+    & > a {
+        @include font('bold');
+        @include not-selectable;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 4px;
+        color: white;
+        background-color: #08bc9a;
+        display: block;
+        margin-left: 22px;
+        margin-right: 22px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    & > a:hover {
+        background-color: darken(#08bc9a, 5);
+    }
+
+    @include mobile-only {
+        position: static;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.pricing__grid-blurb {
+    display: inline-block;
+    width: 580px;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-top: 20px;
+    margin-bottom: 100px;
+
+    @include mobile-only {
+        width: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+//##############################################################################
+// FAQs
+//##############################################################################
+
+@mixin faq-section {
+    display: inline-block;
+    margin-top: 45px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    min-height: 260px;
+
+    & > div {
+        text-align: left;
+        display: inline-block;
+        width: 85%;
+
+        @include mobile-only {
+            width: 100%;
+        }
+    }
+
+    @include mobile-only {
+        float: none;
+        width: 100%;
+        margin-top: 20px;
+        min-height: inherit;
+    }
+}
+
+.pricing-faq {
+    width: $faq-width;
+    margin: 0 auto;
+    text-align: center;
+    overflow: auto;
+
+    @include mobile-only {
+        width: 85%;
+        text-align: left;
+    }
+}
+
+.pricing-faq__headline {
+    @include font('semibold');
+    margin-top: 70px;
+    margin-bottom: 25px;
+    color: #5d5d5d;
+    font-size: 32px;
+    display: block;
+
+    @include mobile-only {
+        margin-top: 35px;
+        margin-bottom: 15px;
+        font-size: 26px;
+    }
+}
+
+.pricing-faq__section__headline {
+    @include font('light');
+    color: #5d5d5d;
+    font-size: 31px;
+    display: block;
+    padding-bottom: 5px;
+
+    @include mobile-only {
+        font-size: 24px;
+    }
+}
+
+.pricing-faq__section {
+    @include faq-section;
+}
+
+.pricing-faq__section-wide {
+    @include faq-section;
+    width: 100%;
+
+    & > div {
+        width: 93%;
+
+        @include mobile-only {
+            width: 100%;
+        }
+    }
+}
+
+.pricing-faq__technical {
+    background-color: #dddddd;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+}
+
+.pricing-faq__button {
+    margin-top: 50px;
+    text-align: center;
+
+    & > a {
+        @include basic-button(#186dcc, #3486ec);
+    }
+
+    @include mobile-only {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+}

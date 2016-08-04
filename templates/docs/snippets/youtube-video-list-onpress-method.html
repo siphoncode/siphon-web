@@ -1,0 +1,11 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+onPressVideo: function(videoID) {
+  console.log(&#x27;Pressed video: &#x27;, videoID);
+  this.props.navigator.push({
+    name: &#x27;player&#x27;,
+    videoID: videoID
+  });
+},
+</code></pre>
+{% endverbatim %}

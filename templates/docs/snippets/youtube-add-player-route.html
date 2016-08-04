@@ -1,0 +1,45 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+&#x27;use strict&#x27;;
+
+var React = require(&#x27;react-native&#x27;);
+var {
+  AppRegistry,
+  Navigator
+} = React;
+
+var VideoListView = require(&#x27;./components/VideoListView&#x27;);
+var PlayerView = require(&#x27;./components/PlayerView&#x27;);
+
+var App = React.createClass({
+  renderScene: function(route, nav) {
+    if (route.name == &#x27;list&#x27;) {
+      return (
+        &#x3C;VideoListView
+          navigator={nav}
+          playlistID=&#x22;PLF76F25F55798FDBC&#x22;
+        /&#x3E;
+      );
+    } else {
+      return (
+        &#x3C;PlayerView
+          navigator={nav}
+          videoID={route.videoID}
+        /&#x3E;
+      );
+    }
+  },
+  render: function() {
+    return (
+      &#x3C;Navigator
+        style={{flex: 1, backgroundColor: &#x27;black&#x27;}}
+        initialRoute={{name: &#x27;list&#x27;}}
+        renderScene={this.renderScene}
+      /&#x3E;
+    );
+  }
+});
+
+AppRegistry.registerComponent(&#x27;App&#x27;, () =&#x3E; App);
+</code></pre>
+{% endverbatim %}

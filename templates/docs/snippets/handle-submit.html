@@ -1,0 +1,9 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+handleSubmit: function(event) {
+  console.log(&#x27;Sending: &#x27; + event.nativeEvent.text);
+  this.ws.send(event.nativeEvent.text);
+  this.refs.textInput.setNativeProps({text: &#x27;&#x27;});
+},
+</code></pre>
+{% endverbatim %}

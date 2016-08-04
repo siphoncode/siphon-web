@@ -1,0 +1,141 @@
+
+@import 'responsive';
+@import 'buttons';
+
+//##############################################################################
+// Site-wide header
+//##############################################################################
+
+$header-height: 90px;
+$logo-title-padding: 34px;
+
+.header {
+    width: 100%;
+    height: $header-height;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e2e2e2;
+
+    & > div {
+        text-align: right;
+        width: 960px;
+        margin: 0 auto;
+        position: relative; // for .header__logo positioning
+    }
+
+    @include mobile-only {
+        margin: 0;
+        padding-left: 20px;
+    }
+}
+
+.header__logo {
+    position: absolute;
+    top: -8px + $logo-title-padding;
+    left: 0;
+
+    :hover {
+        opacity: 0.85;
+    }
+}
+
+.header__title {
+    position: absolute;
+    top: $logo-title-padding;
+    left: 128px;
+    color: #abb3b6;
+    line-height: 32px;
+    padding-left: 4px;
+    font-size: 30px;
+}
+
+.header__links > a {
+    @include font('semibold');
+    font-size: 17px;
+    color: #3270b0;
+    margin-right: 32px;
+    line-height: $header-height + 2px;
+
+    &:hover {
+        opacity: 0.75;
+    }
+
+    // Login/logout link
+    &:last-child {
+        @include header-button;
+    }
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+.header__active-link {
+    color: #1f446a !important;
+}
+
+//##############################################################################
+// Landing page style header
+//##############################################################################
+
+$logo-height: 39px;
+$container-width: 960px;
+
+.landing-header {
+    border-bottom: 1px solid #d3d3d3;
+    padding-top: 24px;
+    padding-bottom: 20px;
+    width: 100%;
+
+    & > div {
+        height: $logo-height;
+        width: $container-width;
+        margin: 0 auto;
+
+        & > a > img {
+            position: relative;
+            top: -2px;
+        }
+    }
+
+    @include mobile-only {
+        & > div {
+            text-align: center;
+            width: 100%;
+        }
+
+        padding-top: 12px;
+        padding-bottom: 8px;
+    }
+}
+
+.landing-header__links {
+    float: right;
+    line-height: $logo-height;
+
+    & > a {
+        @include font('semibold');
+        font-size: 17px;
+        color: #3a82cc;
+        margin-right: 33px;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    @include mobile-only {
+        display: none;
+    }
+
+    .landing-header__links__dashboard {
+        @include header-dashboard-button;
+    }
+
+    .landing-header__links__login {
+        @include header-button();
+    }
+
+    .landing-header__active-link {
+        color: #1f446a;
+    }
+}

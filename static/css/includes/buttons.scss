@@ -1,0 +1,49 @@
+
+@mixin basic-button($text-color, $border-color, $background-color: none) {
+    @include font('semibold');
+    display: inline-block;
+    font-size: 21px;
+    color: $text-color;
+    border: 2px solid $border-color;
+    background-color: $background-color;
+    border-radius: 8px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 13px;
+    padding-right: 13px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+@mixin basic-button-small($text-color, $border-color) {
+    @include basic-button($text-color, $border-color);
+    @include font('regular');
+    font-size: 20px;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@mixin header-button($text-color: #9a9a9a, $border-color: #bbbaba) {
+    @include font('regular');
+    font-size: 18px;
+    border: 1px solid $border-color;
+    color: $text-color;
+    margin-right: 0;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+@mixin header-dashboard-button($text-color: #2ab498, $border-color: #2ab498) {
+    @include header-button($text-color, $border-color);
+    @include font('semibold');
+    border: 2px solid $border-color;
+}

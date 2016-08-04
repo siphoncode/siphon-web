@@ -1,0 +1,80 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Analytics | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/analytics.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" with title="Analytics" %}
+<div class="analytics">
+    <h2>Weekly user growth (%)</h2>
+    <p>Each label on the x-axis is a Monday representing the previous week up to midnight on that date.</p>
+    <div class="analytics__chart" id="weekly-user-growth"></div>
+
+    <h2>Cumulative users</h2>
+    <div class="analytics__chart" id="cumulative-users"></div>
+
+    <h2>TODO</h2>
+    <ul>
+        <li>'Quick snapshot' section like Tradewave</li>
+        <li>Monthly active users (grouped by month)</li>
+        <li>Pushes / app loads per day and per week (import from Mixpanel)</li>
+        <li>Paying customers (grouped by week)</li>
+        <li>Churn</li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages':['corechart']});
+
+  // Weekly user growth
+  google.charts.setOnLoadCallback(function() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Week');
+      data.addColumn('number', 'Percentage growth');
+      data.addColumn('number', 'Target growth');
+      data.addRows({{ weekly_user_growth|safe }});
+
+      var chart = new google.visualization.LineChart(
+          document.getElementById('weekly-user-growth'));
+      chart.draw(data, {
+          chartArea: {
+              left: 60,
+              right: 30,
+              top: 40,
+              bottom: 40
+          },
+          legend: {
+              position: 'none'
+          }
+      });
+  });
+
+  // Cumulative users
+  google.charts.setOnLoadCallback(function() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Week');
+      data.addColumn('number', 'Number of users');
+      data.addRows({{ cumulative_users|safe }});
+
+      var chart = new google.visualization.LineChart(
+          document.getElementById('cumulative-users'));
+      chart.draw(data, {
+          chartArea: {
+              left: 60,
+              right: 30,
+              top: 40,
+              bottom: 40
+          },
+          legend: {
+              position: 'none'
+          }
+      });
+  });
+</script>
+{% endblock %}

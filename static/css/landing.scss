@@ -1,0 +1,485 @@
+
+@import 'includes/fonts';
+@import 'includes/mixins';
+@import 'includes/buttons';
+@import 'includes/responsive';
+
+$container-width: 960px;
+
+@mixin headline-font {
+    font-family: Helvetica, 'helvetica', 'arial', sans-serif;
+}
+
+.landing__gray-text {
+    color: #aaaaaa !important;
+}
+
+//##############################################################################
+// Hero section
+//##############################################################################
+
+.landing-hero {
+    width: 100%;
+    color: white;
+    text-align: center;
+    overflow: auto;
+    background-color: #131318; // fallback
+    background-image: url('/static/img/blurred-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.landing-hero__headline {
+    @include headline-font;
+    display: block;
+    color: white;
+    font-size: 45px;
+    padding-top: 80px;
+
+    @include mobile-only {
+        padding-top: 40px;
+        font-size: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.landing-hero__subheading {
+    @include headline-font;
+    padding-top: 10px;
+    display: block;
+    color: white;
+    opacity: 0.4;
+    font-size: 27px;
+
+    @include mobile-only {
+        font-size: 24px;
+        padding-top: 18px;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+.landing-hero__signup__button {
+  @include basic-button(#ffffff, #159d82, #159d82);
+  margin-top: 65px;
+  margin-bottom: 65px;
+  margin-right: 20px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  @include mobile-only {
+      display: block;
+      max-width: 240px;
+      margin: 0 auto;
+      margin-top: 24px;
+  }
+}
+
+.landing-hero__quickstart__button {
+    @include basic-button(#ffffff, #3a87c0, #3a87c0);
+    padding-left: 18px;
+    padding-right: 18px;
+
+    @include mobile-only {
+        display: block;
+        max-width: 200px;
+        margin: 0 auto;
+        margin-top: 24px;
+    }
+}
+
+//##############################################################################
+// Top points
+//##############################################################################
+
+$point-container-height: 82px; // height of the tallest icon
+
+.landing-hero__points {
+    margin: 0 auto;
+
+    & > div:last-child {
+        margin-top: 54px;
+
+        @include mobile-only {
+            margin: 0;
+        }
+    }
+
+    & > div > div:last-child {
+        padding-left: 102px;
+
+        @include mobile-only {
+            padding: 0;
+        }
+    }
+
+    @include mobile-only {
+        margin-top: 30px;
+    }
+}
+
+.landing-hero__point {
+    display: inline-block;
+    height: $point-container-height;
+
+    @include mobile-only {
+        transform: scale(0.9);
+        margin-top: 10px;
+    }
+
+    & > a:hover {
+        opacity: 0.7;
+    }
+}
+
+.landing-hero__point__icon {
+    display: inline-block;
+    width: 90px; // width of the widest icon
+    line-height: $point-container-height;
+    text-align: right;
+    margin-right: 15px;
+
+    & > img {
+        vertical-align: middle;
+    }
+}
+
+.landing-hero__point__text {
+    display: inline-block;
+    width: 240px;
+    line-height: $point-container-height;
+
+    & > span {
+        color: white;
+        font-size: 19px;
+        text-align: left;
+        vertical-align: middle;
+        display: inline-block;
+        line-height: normal;
+
+        @include mobile-only {
+            text-align: center;
+        }
+    }
+}
+
+.landing-hero__video_container {
+    margin-top: 70px;
+
+    @include mobile-only {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}
+
+$video-pad: 26px;
+
+.landing-hero__video {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 22px;
+    display: inline-block;
+    padding: $video-pad;
+    padding-bottom: $video-pad - 4px;
+
+    & > img {
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        border-radius: 12px;
+    }
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    @include mobile-only {
+        background: none;
+        border-radius: 0;
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: auto;
+        height: auto;
+
+        & > img {
+            width: 80%;
+            max-width: 530px;
+            height: auto;
+        }
+    }
+}
+
+//##############################################################################
+// Bullets section
+//##############################################################################
+
+$bullet-margin: 92px;
+
+.landing-bullets {
+    width: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    & > div {
+        width: $container-width;
+        margin: 0 auto;
+    }
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+@mixin bullet {
+    display: inline-block;
+    color: white;
+    // text-align: left;
+    line-height: 25px;
+    margin-right: $bullet-margin;
+    font-size: 18px;
+
+    & > div {
+        width: 270px;
+        margin: 0 auto;
+    }
+
+    & > div > img {
+        display: block;
+        margin: 0 auto;
+        padding-bottom: 8px;
+    }
+}
+
+.landing-bullets__bullet__platforms {
+    @include bullet;
+
+    & > div {
+        width: 230px;
+    }
+}
+
+.landing-bullets__bullet__updates {
+    @include bullet;
+
+    & > div {
+        width: 265px;
+    }
+}
+
+.landing-bullets__bullet__javascript {
+    @include bullet;
+    margin-right: 0;
+
+    & > div {
+        width: 270px;
+    }
+}
+
+//##############################################################################
+// Workflow section
+//##############################################################################
+
+$workflow-spacing: 70px;
+
+.landing-workflow-section {
+    margin-top: $workflow-spacing;
+    text-align: center;
+    padding-bottom: $workflow-spacing;
+    border-bottom: 1px solid #c8c8c8;
+
+    & > div {
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    & > div:first-child {
+        margin-right: 84px;
+    }
+
+    @include mobile-only {
+        margin: auto;
+        padding: 20px;
+        margin-top: 20px;
+    }
+}
+
+.landing-workflow-section__graphic__subtitle {
+    width: 230px;
+    font-size: 17px;
+    line-height: 25px;
+    color: #939393;
+    margin: 0 auto;
+
+    & > a {
+        @include font('semibold');
+        color: #939393;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    & > img {
+        margin-right: 6px;
+        position: relative;
+        top: 2px;
+    }
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+.landing-workflow-section__graphic__subtitle-beta-testing {
+    width: 250px;
+}
+
+.landing-workflow-section__graphic__push {
+    position: relative;
+    top: 46px;
+
+    @include mobile-only {
+        position: static;
+    }
+}
+
+.landing-workflow-section__graphic__publish {
+    margin-top: 80px;
+    margin-bottom: 6px;
+
+    @include mobile-only {
+        margin: 0;
+    }
+}
+
+.landing-workflow-section__graphic__play {
+    @include mobile-only {
+        display: none;
+    }
+}
+
+.landing-workflow-section__content {
+    width: 390px;
+
+    & > p {
+        color: #383838;
+        font-size: 19px;
+        line-height: 30px;
+    }
+
+    @include mobile-only {
+        width: auto;
+
+        & > p {
+            font-size: 18px;
+        }
+    }
+}
+
+// .landing-workflow-section__content__coming-soon {
+//     @include font('semibold');
+//     display: inline-block;
+//     font-size: 13px;
+//     color: #a8a8a8;
+//     border: 1px solid #d3d3d3;
+//     border-radius: 4px;
+//     margin-bottom: 16px;
+//     padding-left: 6px;
+//     padding-right: 6px;
+//     padding-top: 3px;
+//     padding-bottom: 3px;
+// }
+
+.landing-workflow-section__content__headline {
+    @include font('light');
+    font-size: 38px;
+    color: #4d4d4d;
+
+    @include mobile-only {
+        font-size: 30px;
+
+        & br {
+            display: none;
+        }
+    }
+}
+
+.landing-workflow-section__content__console {
+    border: 1px solid #cccccc;
+    font-size: 28px;
+    color: #838383;
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    line-height: 50px;
+    margin-top: 34px;
+    margin-bottom: 34px;
+
+    & > span {
+        @include font('light');
+        font-size: 36px;
+        color: #d0d0d0;
+        position: relative;
+        top: 3px;
+        padding-right: 6px;
+    }
+
+    @include mobile-only {
+        font-size: 20px;
+        padding-left: 6px;
+        line-height: 38px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        & > span {
+            font-size: 27px;
+            padding-right: 0;
+        }
+    }
+}
+
+.landing-workflow-section__content__button {
+    @include basic-button(#2ab498, #2ab498);
+    margin-top: 12px;
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+//##############################################################################
+// Pre-footer section
+//##############################################################################
+
+.landing-pre-footer {
+    text-align: center;
+    padding-top: 48px;
+
+    & > span {
+        @include font('light');
+        display: block;
+        font-size: 38px;
+        color: black;
+    }
+
+    & > a {
+        display: block;
+        margin-top: 28px;
+        @include basic-button(#186dcc, #3486ec);
+
+        &:last-child {
+            @include basic-button(#717171, #8d8d8d);
+            margin-left: 20px;
+        }
+    }
+
+    @include mobile-only {
+        padding-bottom: 40px;
+
+        & > span {
+            font-size: 32px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}

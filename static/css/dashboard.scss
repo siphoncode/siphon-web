@@ -1,0 +1,140 @@
+
+@import 'includes/mixins';
+@import 'includes/buttons';
+
+.dashboard {
+    @include container;
+    position: relative; // so that we can position tweet box absolutely
+    min-height: 400px;
+    overflow: auto; // clearfix
+}
+
+.dashboard__subheading {
+    @include subheading;
+    padding-bottom: 4px;
+}
+
+.dashboard__empty-spinner {
+    display: block;
+    padding-bottom: 34px;
+}
+
+.dashboard__left {
+    width: 54%;
+    float: left;
+}
+
+.dashboard__right {
+    width: 46%;
+    float: right;
+}
+
+//##############################################################################
+// App tiles
+//##############################################################################
+
+$tile-height: 56px;
+
+.dashboard__tiles {
+    padding-top: 24px;
+    padding-bottom: 32px;
+}
+
+.dashboard__tiles__empty {
+    font-size: 20px;
+    opacity: 0.5;
+
+    & > span {
+        font-size: 18px;
+        position: relative;
+        top: -5px;
+        left: 10px;
+    }
+}
+
+.dashboard__tile {
+    height: $tile-height;
+    position: relative;
+    margin-bottom: 34px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.dashboard__tile__status {
+    display: inline-block;
+
+    // Vertical centering trick
+    position: absolute;
+    top: 50%;
+    margin-top: -5px;
+    left: 0;
+    width: 10px;
+
+    & > span {
+        display: block;
+        background: #71cb9f;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+    }
+}
+
+.dashboard__tile__icon {
+    display: inline-block;
+    background-image: url('/static/img/dashboard/tile-icon.png');
+    width: 52px;
+    height: 52px;
+    border: 1px solid #d8d8d8;
+    border-radius: 6px;
+    margin-left: 26px;
+}
+
+.dashboard__tile__text {
+    display: inline-block;
+    margin-left: 18px;
+    height: $tile-height;
+    position: absolute;
+
+    .dashboard__tile__name {
+        display: block;
+        line-height: normal;
+        @include font('semibold');
+        font-size: 23px;
+        color: #2d4353;
+    }
+
+    .dashboard__tile__blurb {
+        display: block;
+        line-height: normal;
+        color: #8c8c8c;
+        font-size: 17px;
+        padding-top: 2px;
+    }
+}
+
+//##############################################################################
+// Other content
+//##############################################################################
+
+.dashboard__button {
+    @include basic-button-small(#2ab498, #2ab498);
+    display: inline-block;
+
+    &:last-child {
+        margin-top: 20px;
+    }
+}
+
+.dashboard__subscription {
+    margin-bottom: 38px;
+}
+
+.dashboard__twitter {
+    width: 100%;
+
+    & > a {
+        display: block;
+    }
+}

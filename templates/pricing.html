@@ -1,0 +1,298 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Pricing | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/pricing.scss" %}" />
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/includes/powertip.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/landing_header.html" %}
+<div class="pricing">
+
+    <!-- <div class="pricing__offer">
+        <span><strong>New</strong></span>
+        All of our plans now come with a <br /><strong>30-day free trial</strong>. Cancel at any time.
+    </div> -->
+
+    <!-- Headline -->
+    <span class="pricing__headline">The easiest way to publish React Native apps.</span>
+    <span class="pricing__subheading">Iterate faster with instant over-the-air updates.</span>
+    <!-- Switch -->
+    <div class="pricing__switch-container">
+        <div class="pricing__switch">
+            <span id="switch-monthly" class="pricing__switch__active">Monthly</span>
+            <span id="switch-yearly">Yearly (-20%)</span>
+        </div>
+    </div>
+    <!-- Grid -->
+    <div class="pricing__grid">
+        <!-- Developer plan -->
+        <div class="pricing__grid-plan">
+            <div id="switch-price-dev">
+                <span class="pricing__grid-plan__title">Developer</span>
+                <span class="pricing__grid-plan__price">$29</span>
+                <span class="pricing__grid-plan__blurb">per app per month</span>
+            </div>
+            <div>
+                <ul>
+                    <li><strong><a href="#" class="tooltips" title="Single seat. This entitles one developer to work on the app.">1</a></strong> individual</li>
+                    <li><strong>10,000</strong><br /><a href="#" class="tooltips" title="We count a Monthly Active User as a user who has opened your app at least once within the past 30 days. If a user uninstalls your app, or stops using it, they are not counted.">monthly active users</a></li>
+                    <li><strong><a href="#" class="tooltips" title="This amount is determined by calculating the size of your entire Siphon app directory. This limit is only enforced when you publish the app, not during development.">50mb</a></strong> max. app size</li>
+                    <li>30-day <a href="#" class="tooltips" title="Your card will not be charged for the first month. You can cancel the plan at any time before the first month is over, at no charge.">free trial</a></li>
+                    <li><a href="{% url 'docs:beta-testing' %}">beta testing</a></li>
+                    <li>email support</li>
+                </ul>
+                <div class="pricing__grid-plan__button">
+                    <a id="switch-link-dev" href="{% url 'subscriptions:plan_redirect' 'developer-plan-monthly-1mo-trial' %}">Select this plan</a>
+                </div>
+            </div>
+        </div>
+        <!-- Pro plan -->
+        <div class="pricing__grid-plan">
+            <div id="switch-price-pro">
+                <span class="pricing__grid-plan__title">Pro</span>
+                <span class="pricing__grid-plan__price">$89</span>
+                <span class="pricing__grid-plan__blurb">per app per month</span>
+            </div>
+            <div>
+                <ul>
+                    <li><strong><a href="#" class="tooltips" title="Five seats. This entitles multiple developers on your team to work on the app.">5</a></strong> developers</li>
+                    <li><strong>100,000</strong><br /><a href="#" class="tooltips" title="We count a Monthly Active User as a user who has opened your app at least once within the past 30 days. If a user uninstalls your app, or stops using it, they are not counted.">monthly active users</a></li>
+                    <li><strong>unlimited</strong> app size</li>
+                    <li>30-day <a href="#" class="tooltips" title="Your card will not be charged for the first month. You can cancel the plan at any time before the first month is over, at no charge.">free trial</a></li>
+                    <li><a href="{% url 'docs:beta-testing' %}">beta testing</a></li>
+                    <li><a href="{% url 'docs:team-sharing' %}">team sharing</a> feature</li>
+                    <li>priority support</li>
+                </ul>
+                <div class="pricing__grid-plan__button">
+                    <a id="switch-link-pro" href="{% url 'subscriptions:plan_redirect' 'pro-plan-monthly-1mo-trial' %}">Select this plan</a>
+                </div>
+            </div>
+        </div>
+        <!-- Organization plan -->
+        <div class="pricing__grid-plan">
+            <div>
+                <span class="pricing__grid-plan__title">Organization</span>
+                <img src="{% static "img/pricing/letter-icon.png" %}" width="20" height="14" alt="Letter." />
+                <span class="pricing__grid-plan__blurb">
+                    contact us for pricing
+                </span>
+            </div>
+            <div>
+                <ul>
+                    <li><strong>unlimited</strong> developers</li>
+                    <li><strong>unlimited</strong><br /><a href="#" class="tooltips" title="We count a Monthly Active User as a user who has opened your app at least once within the past 30 days. If a user uninstalls your app, or stops using it, they are not counted.">monthly active users</a></li>
+                    <li><strong>unlimited</strong> app size</li>
+                    <li>SLA</li>
+                    <li>private hosting</li>
+                    <li><a href="#" class="tooltips" title="Example: Integrate Siphon with your CI server.">custom integrations</a></li>
+                </ul>
+                <div class="pricing__grid-plan__button">
+                    <a href="{% url 'static:contact' %}">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of grid -->
+    <span class="pricing__grid-blurb">
+        All prices are subject to VAT. Publishing to the App Store requires a
+        seperate iOS developer account. Publishing to Google Play requires a
+        seperate Google Play publisher account.
+    </span>
+</div>
+<!-- FAQ -->
+<div class="pricing-faq">
+    <span class="pricing-faq__headline">Frequently Asked Questions</span>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">How do I get started?</span>
+            <p>You can develop and test your apps for free in the <a href="/a">sandbox</a>, local simulator
+            or using your developer device.</p>
+            <p>There are no limitations on app size of number of seats. Get started by following
+            the <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a>.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">When do I need to pay?</span>
+            <p>You only need to pay when you want to publish an app to the App Store or Google Play. Developing and testing your apps is free.</p>
+            <p>We accept Visa, Mastercard or Amex for making payments.</p>
+            <br /><br /><br />
+        </div>
+    </div>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">Can I upgrade or downgrade my plan?</span>
+            <p>You can switch your plan at any time using
+            the <a href="https://siphon.chargebeeportal.com/portal/login">customer portal</a>.</p>
+            <p>The remaining days on your current plan will be used as credit for the new plan that you switch to.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">Do I need to download Xcode or Android Studio?</span>
+            <p>No. One of the main benefits of using Siphon to publish your app is that we take care of all of
+            this for you.</p>
+            <p>The only software that you need to download is our <a href="{% url 'docs:quickstart' %}">command-line tool</a>.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">I'm a student or non-profit, can I publish my app for free?</span>
+            <p>Sure, <a href="{% url 'static:contact' %}">contact us</a> and we'll sort this out.
+            <p>Please include a brief explanation of what kind of app you're working on.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section">
+        <div>
+            <span class="pricing-faq__section__headline">Are there any additional costs?</span>
+            <p>Publishing to the App Store requires a seperate iOS developer account. Publishing to
+            Google Play requires a seperate Google Play publisher account.</p>
+            <p>Everything else is included. We manage the hosting of your assets and app bundle for you.</p>
+        </div>
+    </div>
+    <a name="how-does-publishing-work"></a>
+    <div class="pricing-faq__section-wide">
+        <div>
+            <span class="pricing-faq__section__headline">How does publishing work?</span>
+            <p>When you type in the <span class="pricing-faq__technical">siphon publish</span>
+            command we will ask you to enter your iOS developer account or Google Play publisher
+            account details. We then build, sign and package an app binary for you behind-the-scenes.</p>
+            <p>The app binary is submitted to the App Store or Google Play on your behalf. It will be listed under your account name.</p>
+            <p>To make changes to an app that is already listed, you can
+            run <span class="pricing-faq__technical">siphon publish</span> again and we will
+            automatically detect whether the update can be issued over-the-air (most common) or if it requires
+            a new binary to be submitted.</p>
+            <p>Please note that we require <strong>certain image assets and metadata</strong> in order to submit your app for each platform. This includes an app icon, screenshots, keywords, description and any other information requested by the App Store or Play Store submission portals. You will be prompted for these as they are needed.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section-wide">
+        <div>
+            <span class="pricing-faq__section__headline">Can I cancel my subscription?</span>
+            <p>Yes. Contracts are either monthly or yearly. You can cancel at any time and all features will
+            continue to work as usual until the end of the billing period.</p>
+            <p>When your subscription expires, your app will still remain in the App Store or Play Store, but
+            you will lose the ability to issue updates. A few days after the expiration date, your app will display a
+            message to your users that it has expired.</p>
+            <p>At this point you will need to manually publish future
+            changes yourself, using Xcode or Android Studio, but you will lose the ability to issue over-the-air
+            updates (i.e. you will need to submit a new app binary by yourself, manually.)</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section-wide">
+        <div>
+            <span class="pricing-faq__section__headline">How do over-the-air updates work?</span>
+            <p>For the vast majority updates (i.e. those that do not require a new version of React Native) we let
+            you push changes to your users without going through the App Store approval process each time.</p>
+            <p>A user's device checks for updates when the app first loads, or when it enters the foreground
+            after a set period of inactivity. Any problems communicating over the network are hidden from the user;
+            the app will simply try to update itself again next time it enters the foreground.</p>
+            <p>To make this process fast and efficient, we generate diffs when your app bundle changes
+            (i.e. when the app's JavaScript source code is modified) so that only the minimum needs to be sent over the network.
+            It should typically take less than 5 seconds for most network connections.</p>
+            <p>In the case of images and other assets, we cache these on the user's device so that
+            only new or changed assets need to be fetched over the network.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section-wide">
+        <div>
+            <span class="pricing-faq__section__headline">Can I publish my app without Siphon?</span>
+            <p>Yes. Apps created using Siphon are the same as any other React Native apps and therefore
+            you can publish them using the standard tools. They are 100% compatible and there is no lock-in to the service.</p>
+            <p>However, you will lose the ability to use our simple command-line tool and to issue over-the-air updates to your users.</p>
+            <p>In addition, the process of setting up
+            and publishing apps manually using Xcode or Android Studio is not a particularly enjoyable way
+            to spend a couple of days.</p>
+        </div>
+    </div>
+    <div class="pricing-faq__section-wide">
+        <div>
+            <span class="pricing-faq__section__headline">Which native modules can be used in published apps?</span>
+            <p>We bundle many of the <a href="{% url 'docs:base-version' %}">most popular native modules</a> for you behind-the-scenes.
+            You can use them in your apps straight away; simply reference them in your JavaScript code.</p>
+            <p>Please <a href="mailto:hello@getsiphon.com">let us know</a> if there are any other native modules that you need
+            for your app. We will do our best to integrate them for you.</p>
+            <p><strong><a href="{% url 'docs:base-version' %}">See the list of all bundled native modules</a></strong></p>
+        </div>
+    </div>
+</div>
+<div class="pricing-faq__button">
+    <a href="{% url 'docs:faq' %}">More Frequently Asked Questions</a>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="{% static "lib/jquery.powertip-1.2.0/jquery.powertip.min.js" %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var activeCls = 'pricing__switch__active';
+        var priceCls = '.pricing__grid-plan__price';
+        var blurbCls = '.pricing__grid-plan__blurb';
+
+        var monthly = $('#switch-monthly');
+        var yearly = $('#switch-yearly');
+        var dev = $('#switch-price-dev');
+        var pro = $('#switch-price-pro');
+        var devLink = $('#switch-link-dev');
+        var proLink = $('#switch-link-pro');
+
+        var devRedirectMonthly = '{% url 'subscriptions:plan_redirect' 'developer-plan-monthly-1mo-trial' %}';
+        var devRedirectYearly = '{% url 'subscriptions:plan_redirect' 'developer-plan-yearly-1mo-trial' %}';
+        var proRedirectMonthly = '{% url 'subscriptions:plan_redirect' 'pro-plan-monthly-1mo-trial' %}';
+        var proRedirectYearly = '{% url 'subscriptions:plan_redirect' 'pro-plan-yearly-1mo-trial' %}';
+
+        var monthlyBlurb = 'per app per month';
+        var yearlyBlurb = 'per app per year';
+        var devMonthlyPrice = '$29';
+        var devYearlyPrice = '$275';
+        var proMonthlyPrice = '$89';
+        var proYearlyPrice = '$849';
+
+        monthly.on('click', function() {
+            yearly.removeClass(activeCls);
+            monthly.addClass(activeCls);
+
+            dev.find(priceCls).text(devMonthlyPrice);
+            pro.find(priceCls).text(proMonthlyPrice);
+            dev.find(blurbCls).text(monthlyBlurb);
+            pro.find(blurbCls).text(monthlyBlurb);
+
+            devLink.attr('href', devRedirectMonthly);
+            proLink.attr('href', proRedirectMonthly);
+        });
+
+        yearly.on('click', function() {
+            monthly.removeClass(activeCls);
+            yearly.addClass(activeCls);
+
+            dev.find(priceCls).text(devYearlyPrice);
+            pro.find(priceCls).text(proYearlyPrice);
+            dev.find(blurbCls).text(yearlyBlurb);
+            pro.find(blurbCls).text(yearlyBlurb);
+
+            devLink.attr('href', devRedirectYearly);
+            proLink.attr('href', proRedirectYearly);
+        });
+
+        $('.pricing__switch-container').animate({opacity: 1}, 'fast');
+
+        // Powertip (custom event handling to fix mobile)
+        $('.tooltips').powerTip({manual: true, smartPlacement: true});
+        $('.tooltips').on({
+            click: function(event) {
+                $.powerTip.show(this, event);
+                event.preventDefault();
+            },
+            mouseenter: function(event) {
+                $.powerTip.show(this, event);
+            },
+            mouseleave: function() {
+                $.powerTip.hide(this);
+            }
+        });
+    });
+
+    mixpanel.track('Web: Pricing');
+</script>
+{% endblock %}

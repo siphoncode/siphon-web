@@ -1,0 +1,15 @@
+Your app is now available in the Google Play Developer Console.
+
+Please visit https://play.google.com/apps/publish/ and log in. Your app will be visible on the main screen.
+
+Click on your app's icon or name to view the 'Store Listing' page. Enter a short description and full description, and provide at least two screenshots. You are required to provide at least one 7-inch and one 10-inch screenshot.
+
+Select an appropriate category and content rating from the drop-down lists provided and enter your contact details. You may also include a privacy policy URL if you have one.
+
+When you have provided the necessary details, a 'Publish this app button' will be enabled at the top of the page. When you are ready, click this button to submit your app.
+
+If you have any queries, please don't hesitate to get in touch or reply to this email.
+
+Best wishes,
+
+The Siphon Team

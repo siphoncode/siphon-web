@@ -1,0 +1,56 @@
+
+@import 'includes/mixins';
+@import 'includes/responsive';
+@import 'includes/buttons';
+
+// Page is very short, so need to flush the footer
+// to the bottom of the browser window
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.accept-invite {
+    color: #5d5d5d;
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 76px;
+    text-align: center;
+    font-size: 24px;
+
+    @include mobile-only {
+        width: auto;
+        padding-top: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 22px;
+    }
+}
+
+.accept-invite__error {
+    @include font('semibold');
+    color: red;
+}
+
+.accept-invite__button_container {
+  width: 100%;
+  text-align: center;
+}
+
+.accept-invite__button {
+  @include basic-button(#ffffff, #3a87c0, #3a87c0);
+  margin-top: 30px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  @include mobile-only {
+      display: block;
+      max-width: 220px;
+      margin: 0 auto;
+      margin-top: 24px;
+      padding-left: 0;
+      padding-right: 0;
+  }
+}

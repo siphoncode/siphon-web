@@ -1,0 +1,48 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Share your app with beta testers | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#create-app">Create an app</a>
+<a href="#invite-beta-tester">Invite a beta tester</a>
+<a href="#sharing-changes">Sharing changes with your beta testers</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Share your app with beta testers</div>
+    <img class="docs__content__create-app-image" src="{% static "img/docs/quickstart/create-app.png" %}" width="251" height="213" />
+    <p>Before publishing an app it can be useful to send a preview to third parties for beta testing purposes. For example, as an agency you may want to share your work with a client before publishing to the App Store or Play Store.</p>
+    <p>Siphon enables you to instantly share your app with no approval process needed.</p>
+    <p>Simply specify an email address and we will send them an invitation to beta test your app. The recipient will be prompted to create a Siphon account if they do not already have one.</p>
+    <p>If they accept the invitation, a special <strong>read-only</strong> version of your app will appear in the user's list of apps in the <a href="/a">Siphon Sandbox</a> app. The beta tester will not see the latest changes to your app unless you purposely <a href="#sharing-changes">share those changes</a>.</p>
+
+    <a name="create-app"></a>
+    <div class="docs__subheading">Create an app</div>
+    <p>If you don't already have a Siphon app that you want to share you will need to create one. The command-line tool can
+    make us a simple template app in one step.</p>
+    <p>Navigate to a suitable directory (anywhere is fine) and type the following
+    command to create a new app:</p>
+    <div class="docs__code"><span>$ </span>siphon create my-app</div>
+    <p>You can name the app anything you like. The tool creates a new directory with same name.</p>
+
+    <a name="invite-beta-tester"></a>
+    <div class="docs__subheading">Invite a beta tester</div>
+    <p>Find out the email address of the person you want to share your app with. This person does not need to have a Siphon account yet; they will be prompted to create one if needed.</p>
+    <p>Navigate to your app directory and run the following command (be sure to replace <strong>someone@domain.com</strong> with the right email address):</p>
+    <div class="docs__code"><span>$ </span>siphon share someone@domain.com</div>
+    <p>You will be prompted to confirm your decision. If you continue, a beta special copy of your original app will be generated internally and the command-line tool will push your local files to that app.</p>
+    <p>The beta tester will now receive an invitation email with instructions on how to run your app.</p>
+
+    <a name="sharing-changes"></a>
+    <div class="docs__subheading">Sharing changes with your beta testers</div>
+    <p>The app that a beta tester sees is a special read-only copy and it <strong>does not</strong> automatically update every time you run <span class="docs__technical">siphon push</span>.</p>
+    <p>To share your changes, you should navigate to your app directory and run the <span class="docs__technical">siphon share</span> command without arguments:</p>
+    <div class="docs__code"><span>$ </span>siphon share</div>
+    <p>You will first be prompted with a list of all existing beta testers who have accepted an invitation. If you confirm, your local files will be pushed and the beta app will automatically reload in the user's sandbox. The beta tester will also receive an email notification that the app has been updated.</p>
+
+
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/Beta testing');
+</script>
+{% endblock %}

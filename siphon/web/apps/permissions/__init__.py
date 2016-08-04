@@ -1,0 +1,3 @@
+
+class AppSharingException(Exception):
+    pass

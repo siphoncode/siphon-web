@@ -1,0 +1,33 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Log in | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/accounts.scss" %}" />
+{% endblock %}
+
+{% block content %}
+<a href="/" class="login-logo">
+    <img src="{% static "img/mini-logo.png" %}" width="29" height="29" />
+</a>
+<div class="login">
+    <div class="login__heading">Log in</div>
+    {% if error %}<span class="login__error">{{ error }}</span>{% endif %}
+    <form method="post" id="login-form">
+        {% csrf_token %}
+        <input id="username-input" type="text" name="username" placeholder="Username or email" value="{{ username }}" />
+        <input type="password" name="password" placeholder="Password" maxlength=254 />
+        <a href="#" class="login__submit" onclick="javascript:document.getElementById('login-form').submit();">Log in</a>
+        <input type="submit" style="display:none;" />
+        <span class="login__footnote">No account yet? <a href="{{ register_url }}">Create an account</a>.
+    </form>
+</div>
+
+<script type="text/javascript">
+    (function() {
+        document.getElementById('username-input').focus();
+    })();
+    mixpanel.track('Web: Login');
+</script>
+{% endblock %}

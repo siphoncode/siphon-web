@@ -1,0 +1,59 @@
+
+@import 'includes/mixins';
+@import 'includes/responsive';
+
+// Page is very short, so need to flush the footer
+// to the bottom of the browser window
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.contact-us {
+    color: #5d5d5d;
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 76px;
+
+    & a {
+        @include font('semibold');
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    @include mobile-only {
+        width: auto;
+        padding-top: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.contact-us__headline {
+    @include font('light');
+    display: block;
+    font-size: 31px;
+    max-width: 600px;
+    line-height: 40px;
+
+    @include mobile-only {
+        font-size: 26px;
+    }
+}
+
+.contact-us__content {
+    display: block;
+    font-size: 20px;
+    max-width: 640px;
+    margin-top: 40px;
+    line-height: 28px;
+
+    @include mobile-only {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+}

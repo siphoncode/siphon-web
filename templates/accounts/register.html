@@ -1,0 +1,23 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Create an account | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/accounts.scss" %}" />
+{% endblock %}
+
+{% block content %}
+<a href="/" class="register-logo">
+    <img src="{% static "img/mini-logo.png" %}" width="29" height="29" />
+</a>
+
+<script type="text/javascript">
+    (function() {
+        document.getElementById('first-name-input').focus();
+    })();
+</script>
+<script type="text/javascript">
+    mixpanel.track('Web: Register');
+</script>
+{% endblock %}

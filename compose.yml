@@ -1,0 +1,47 @@
+---
+web:
+  build: .
+  container_name: web
+  tty: true
+  restart: always
+  ports:
+    - "80:80"
+    - "443:443"
+  environment:
+    SIPHON_ENV: $SIPHON_ENV
+    CLI_HOST: $CLI_HOST
+    CLI_PORT: $CLI_PORT
+  volumes:
+    - /volumes/logs
+  links:
+    - postgres_web
+    - rabbitmq
+postgres_web:
+  image: postgres:9.4.5
+  container_name: postgres_web
+  restart: always
+  environment:
+    PGDATA: /volumes/data
+    POSTGRES_DB: web
+    POSTGRES_USER: web
+    POSTGRES_PASSWORD: web
+  volumes:
+    - /volumes/data
+postgres_backups_web:
+  image: getsiphon/postgres-backups:latest
+  container_name: postgres_backups_web
+  restart: always
+  environment:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    S3_BUCKET_NAME: $S3_BACKUPS_BUCKET_NAME
+    GPG_PUBKEY_ID: $GPG_PUBKEY_ID
+    PREFIX: web-backup
+  links:
+    - postgres_web:postgres
+rabbitmq:
+  image: rabbitmq:3.5.6
+  container_name: rabbitmq
+  restart: always
+  ports:
+    - "5672:5672"

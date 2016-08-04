@@ -1,0 +1,18 @@
+{% load static %}
+<div class="landing-header">
+    <div>
+        <a href="/"><img src="{% static "img/landing/logo.png" %}" width="127" height="39" /></a>
+        <div class="landing-header__links">
+            <a href="{% url 'docs:faq' %}">FAQ</a>
+            <a href="{% url 'docs:index' %}">Docs</a>
+            <a href="/blog/">Blog</a>
+            <a href="{% url 'static:pricing' %}"{% if '/pricing' in request.path %} class="landing-header__active-link"{% endif %}>Pricing</a>
+            <a href="{% url 'static:contact' %}">Contact us</a>
+            {% if request.user.is_authenticated %}
+            <a class="landing-header__links__dashboard" href="{% url 'static:dashboard' %}">Dashboard</a>
+            {% else %}
+            <a class="landing-header__links__login" href="{% url 'accounts:login' %}">Log in</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% load compress static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting | Siphon</title>
+    <link rel="apple-touch-icon" href="{% static "img/apple-touch-icon.png" %}" />
+    <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" sizes="32x32" />
+    {% compress css %}
+    <link rel="stylesheet" type="text/css" href="{% static "lib/normalize.css" %}" />
+    <link rel="stylesheet" type="text/x-scss" href="{% static "css/main.scss" %}" />
+    {% endcompress %}
+    <style>
+        body {
+            margin: 30px;
+        }
+        a {
+            font-size: 20px;
+        }
+    </style>
+    <!-- See: http://stackoverflow.com/a/5411601 -->
+    <meta http-equiv="refresh" content="2;url={{ redirect_to }}">
+    {% include "includes/analytics.html" with no_identify=True %}
+    <script type="text/javascript">
+        // Fallback in case the <meta> redirect fails
+        setTimeout(function() {
+            window.location.href = '{{ redirect_to }}';
+        }, 2500);
+
+        // This is only ever called once, on user signup
+        mixpanel.alias('{{ request.user.username }}');
+    </script>
+  </head>
+  <body>
+    <a href="{{ redirect_to }}">Redirecting...</a>
+  </body>
+</html>

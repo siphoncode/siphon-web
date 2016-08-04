@@ -1,0 +1,24 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/accept-invite.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<div class="accept-invite">
+    {% if error %}
+    <span class="accept-invite__error">{{ error }}</span>
+    {% endif %}
+    {% if message %}
+    <span>{{ message }}</span>
+    {% endif %}
+</div>
+<div class="accept-invite__button_container">
+  <a class="accept-invite__button" href="{% url 'static:dashboard' %}">Go to the dashboard</a>
+</div>
+<script type="text/javascript">
+    mixpanel.track('Web: Accept invite');
+</script>
+{% endblock %}

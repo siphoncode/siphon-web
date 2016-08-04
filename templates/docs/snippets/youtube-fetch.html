@@ -1,0 +1,23 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+parseVideos: function(s) {
+  console.log(&#x22;Got feed with length: &#x22; + responseText.length);
+},
+fetchVideos: function() {
+  console.log(&#x27;Fetching video feed...&#x27;);
+  var url = &#x22;https://www.youtube.com/feeds/videos.xml&#x22; +
+    &#x22;?playlist_id=&#x22; + this.props.playlistID;
+  fetch(url)
+    .then((response) =&#x3E; response.text())
+    .then((responseText) =&#x3E; {
+      this.parseVideos(responseText);
+    })
+    .catch((error) =&#x3E; {
+      console.log(&#x27;Error fetching the feed: &#x27;, error);
+    });
+},
+componentDidMount: function() {
+  this.fetchVideos();
+},
+</code></pre>
+{% endverbatim %}

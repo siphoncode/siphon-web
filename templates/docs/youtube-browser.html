@@ -1,0 +1,200 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Build a YouTube playlist browser with React Native and Siphon | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#create-app">Create a new Siphon app</a>
+<a href="#remove-template-content">Remove the template app content</a>
+<a href="#video-list-placeholder">Add a placeholder for the video list screen</a>
+<a href="#install-xml-parser">Install an XML parser</a>
+<a href="#fetch-parse-display-playlist">Fetch, parse and display a YouTube playlist</a>
+<a href="#add-navigator">Add a navigator component</a>
+<a href="#add-video-player">Add a video player screen</a>
+<a href="#add-video-player-route">Add a navigator route for the video player</a>
+<a href="#trigger-video-player">Trigger the video player when tapping a video</a>
+<a href="#next-up">Next up</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Build a YouTube playlist browser with React Native and Siphon</div>
+    <p>We're going to use <a href="https://getsiphon.com">Siphon</a> to quickly build a
+    React Native app from scratch. The finished app will display a live YouTube playlist
+    and let you play a video by tapping it.</p>
+    <p>You will learn all about:</p>
+    <ul>
+        <li>Fetching a remote data source</li>
+        <li>Parsing XML using the <span class="docs__technical">xmldom</span> library</li>
+        <li>How to use React Native's <span class="docs__technical">Navigator</span> component</li>
+        <li>Integrating the <span class="docs__technical">react-native-youtube</span> library (<strong>note:</strong> that it's only currently available for <strong>iOS</strong>)</li>
+    </ul>
+    <p>Please follow the <a href="{% url 'docs:quickstart' %}">quickstart tutorial</a> first if
+    you haven't already set up your machine to use Siphon.</p>
+    <p><a class="docs__content__button" href="{% url 'docs:quickstart' %}">Install the command-line tool</a></p>
+    <p>The <a href="https://github.com/getsiphon/siphon-youtube-video-browser">finished app</a> will look
+    something like this:</p>
+    <p><img src="{% static "img/docs/youtube-browser/playlist.jpg" %}" width="200" height="398" /></p>
+
+    <a name="create-app"></a>
+    <div class="docs__subheading">Create a new Siphon app</div>
+    <p>First, navigate to a suitable directory (anywhere is fine) and type the following
+    command to create a new app:</p>
+    <div class="docs__code"><span>$ </span>siphon create youtube-browser</div>
+    <p>You can call it anything you like, but for the rest of this tutorial we will refer to the app as <strong>youtube-browser</strong>.</p>
+    <p>A new directory containing the basic app template will be created on your local machine and the files will be pushed to our servers.</p>
+    <p>Open up the <a href="/a" target="_blank">Siphon Sandbox</a> app on your iOS device
+    and <strong>tap the new app icon</strong> to run it. Alternatively, if you have a Mac, you
+    can also run it standalone on your iOS device like this:</p>
+    <div class="docs__code">
+        <span>$ </span>cd youtube-browser<br />
+        <span>$ </span>siphon play
+    </div>
+    <p>Or to run it on an iOS simulator with access to the full React Native
+      debugging environment you can use the develop command:</p>
+     <div class="docs__code">
+         <span>$ </span>cd youtube-browser<br />
+         <span>$ </span>siphon develop
+     </div>
+
+    <a name="remove-template-content"></a>
+    <div class="docs__subheading">Remove the template app content</div>
+    <p>We want to start with a blank slate, so let's remove all of the views that come with the
+    template app.
+    <p>Open up the <span class="docs__technical">youtube-browser/index.js</span> file in
+    your favourite editor and edit it so that it looks like this:</p>
+    {% include "docs/snippets/youtube-blank-app.html" %}
+    <p>When you hit save, run <span class="docs__technical">siphon push</span> and the app will reload itself.
+    You should see some basic text.</p>
+
+    <a name="video-list-placeholder"></a>
+    <div class="docs__subheading">Add a placeholder for the video list screen</div>
+    <p>Later we're going to need a view to display a list of video thumbnails, so lets add a placeholder for that
+    now. Make a new subdirectory within your app's directory:</p>
+    <div class="docs__code"><span>$ </span>mkdir components<br /></div>
+    <p>Then, using your chosen text editor, make a new file in the <strong>components</strong> subdirectory,
+    call it <span class="docs__technical">VideoListView.js</span>, and paste in the following code:</p>
+    {% include "docs/snippets/youtube-video-list.html" %}
+    <p>Notice that it's ready to render an <span class="docs__technical">&#x3C;Image&#x3E;</span> component for each video
+    in the playlist, but for now it will be empty because we have no data.</p>
+    <p>Next, edit your <span class="docs__technical">index.js</span> file to import and display our new list view:</p>
+    {% include "docs/snippets/youtube-video-list-app.html" %}
+    <p>The purpose of the <span class="docs__technical">playlistID</span> property that we passed into
+    <span class="docs__technical">&#x3C;VideoListView&#x3E;</span> will become clear later.
+    Note that if you push your changes now, the app will render as an empty white screen.</p>
+
+    <a name="install-xml-parser"></a>
+    <div class="docs__subheading">Install an XML parser</div>
+    <p>In the next section, we're going to parse a YouTube playlist that comes in an XML format.</p>
+    <p>For that we're going to use the <span class="docs__technical">xmldom</span> library. If you don't
+    already have <span class="docs__technical">npm</span> installed on your machine,
+    <a href="http://blog.npmjs.org/post/85484771375/how-to-install-npm">click here</a> to learn how to install it.</p>
+    <p>To install the library, navigate to your app directory and type in:</p>
+    <div class="docs__code">
+        <span>$ </span>npm install xmldom
+    </div>
+    <p>If successful, you should see a newly created <span class="docs__technical">node_modules</span> directory.
+    <div class="docs__content__help-section">
+        <span>
+            Your app directory works like a typical Node.js project directory; you can install <br />
+            suitable third-party modules using <span class="docs__technical">npm install</span>
+            and the command-line tool will push the <span class="docs__technical">node_modules</span> directory and bundle it with your app.
+        </span>
+    </div>
+
+    <a name="fetch-parse-display-playlist"></a>
+    <div class="docs__subheading">Fetch, parse and display a YouTube playlist</div>
+    <p>Our app is going to display a particular YouTube playlist and let you tap a thumbnail to play a
+    video. First we're going to need to fetch the playlist and parse it into a more convenient format.</p>
+
+    <p>YouTube kindly provides an API endpoint that requires no authentication and returns a playlist feed as XML:</p>
+    <p><span class="docs__technical">https://www.youtube.com/feeds/videos.xml?playlist_id=PLAYLIST-ID-HERE</span></p>
+    <p>For example, <a href="https://www.youtube.com/feeds/videos.xml?playlist_id=PLF76F25F55798FDBC">here's a playlist feed</a>
+    containing some funny cat videos. Let's add some code that fetches the feed and outputs the result to the console.</p>
+
+    <p><strong>Stream the logs</strong></p>
+    <p>First, make sure that you're streaming the logs for your app, because we're going to
+    output to the console for now. Open up another terminal window, navigate to the
+    app directory and type in:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon logs
+    </div>
+    <p>Be sure to leave this terminal window open for the rest of the tutorial.</p>
+
+    <p><strong>Fetch the feed</strong></p>
+    <p>Let's add some code that uses the built-in React Native <span class="docs__technical">fetch()</span> function to retrieve the
+    playlist we want to parse. For now we'll just use the cat video playlist.</p>
+    <p>Modify your <span class="docs__technical">components/VideoListView.js</span>
+    file by adding these three methods to the <span class="docs__technical">VideoListView</span> class:</p>
+    {% include "docs/snippets/youtube-fetch.html" %}
+    <p>When the app loads, it's going to grab the remote feed and then log the length of the returned text to the
+    console. Run <span class="docs__technical">siphon push</span> and try it.<p>
+
+    <p><strong>Parse the feed</strong></p>
+    <p>Now we're going to use the <span class="docs__technical">xmldom</span> library to parse the result.
+    First put the following line at the top of your <span class="docs__technical">components/VideoListView.js</span> file,
+    above the class definition:</p>
+    {% include "docs/snippets/youtube-require-xmldom.html" %}
+    <p>Then modify the <span class="docs__technical">parseVideos()</span> method in your
+    <span class="docs__technical">VideoListView</span> class to extract a thumbnail URL and video ID for each feed item:</p>
+    {% include "docs/snippets/youtube-parse-xml.html" %}
+    <p>Now run <span class="docs__technical">siphon push</span> and you should see a list of thumbnail images
+    in the app. That's the playlist!</p>
+
+    <a name="add-navigator"></a>
+    <div class="docs__subheading">Add a navigator component</div>
+    <p>We're going to need a <span class="docs__technical">&#x3C;Navigator&#x3E;</span> component so that our users can
+    switch between the playlist view and the video player that we will add later.</p>
+    <p>Modify your <span class="docs__technical">index.js</span> so that it looks like this:</p>
+    {% include "docs/snippets/youtube-add-navigator.html" %}
+    <p>Right now this doesn't do anything. You will still see the same list of thumbnails, but we expand it later.</p>
+
+    <a name="add-video-player"></a>
+    <div class="docs__subheading">Add a video player screen</div>
+    <p>Now let's add a new component for actually playing the videos and call it
+    <span class="docs__technical">PlayerView</span>. It's just going wrap a
+    <span class="docs__technical">YouTube</span> component and add a button to close the video screen.</p>
+    <p>Using your text editor, make a new file called <span class="docs__technical">components/PlayerView.js</span> and
+    paste in the following code:</p>
+    {% include "docs/snippets/youtube-player-view.html" %}
+    <p>You will notice that it's expecting to be passed a <span class="docs__technical">videoID</span> and a
+    <span class="docs__technical">navigator</span> prop. The button is hooked up to pop the current navigator screen
+    when it is pressed.
+    <p>Also notice that we have imported the <span class="docs__technical">react-native-youtube</span> library.
+    You don't need to install it because all Siphon apps
+    <a href="{% url 'docs:faq' %}#base-version">can access it by default</a>.</p>
+
+    <a name="add-video-player-route"></a>
+    <div class="docs__subheading">Add a navigator route for the video player</div>
+    <p>Now let's modify our <span class="docs__technical">&#x3C;Navigator&#x3E;</span> configuration to support
+    the new player screen. Open up <span class="docs__technical">index.js</span> and modify it as follows:</p>
+    {% include "docs/snippets/youtube-add-player-route.html" %}
+    <p>Now when a view tries to push a new navigator screen containing a <span class="docs__technical">videoID</span>
+    in the route definition, our app will load the player view and play the video.</p>
+
+    <a name="trigger-video-player"></a>
+    <div class="docs__subheading">Trigger the video player when tapping a video</div>
+    <p><strong>Final step.</strong> Let's make it so that when you tap a video thumbnail it actually plays a video for us.</p>
+    <p>Open up your <span class="docs__technical">components/VideoListView.js</span> file and add this method
+    to the <span class="docs__technical">VideoListView</span> class definition:</p>
+    {% include "docs/snippets/youtube-video-list-onpress-method.html" %}
+    <p>Then modify the existing <span class="docs__technical">TouchableOpacity</span> declaration
+    so that it looks exactly like this:</p>
+    {% include "docs/snippets/youtube-video-list-onpress-hookup.html" %}
+    <p><strong>That's it!</strong> Now run <span class="docs__technical">siphon push</span> and
+    open up the app. You should be able to tap the videos and watch them.</p>
+    <p>You can find the full source code for the finished app on GitHub here: <a href="https://github.com/getsiphon/siphon-youtube-video-browser">siphon-youtube-video-browser</a></p>
+
+    <a name="next-up"></a>
+    <div class="docs__subheading">Next up</div>
+    <p>That's the end of the tutorial, thanks for following along. Check out these other guides
+    and resources to learn more:</p>
+    <p class="docs__content__next-buttons">
+        <a class="docs__content__next-button" href="{% url 'docs:chat-app' %}">Build a chat app</a>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}">FAQs</a>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}#publishing">Learn how to publish an app</a>
+    </p>
+
+    <script type="text/javascript">
+        mixpanel.track('Web: Docs/YouTube');
+    </script>
+{% endblock %}

@@ -1,0 +1,22 @@
+
+Hello,
+
+A user of Siphon ({{ owner_username }}) has updated the app "{{ app_name }}" that you are listed as a beta tester for.
+
+You can see the latest changes by logging in to the Siphon Sandbox:
+
+** Siphon Sandbox for iOS: https://getsiphon.com/i
+** Siphon Sandbox for Android: https://getsiphon.com/a
+
+------------------------------
+To stop receiving these emails
+------------------------------
+
+You can remove yourself as a beta tester for this app at any time by clicking "delete" in the Siphon dashboard.
+
+** Dashboard: https://getsiphon.com/dashboard/
+
+------------------------------
+
+https://getsiphon.com
+Support: hello@getsiphon.com

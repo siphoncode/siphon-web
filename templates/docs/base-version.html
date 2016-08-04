@@ -1,0 +1,67 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Base version | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#base-versions">List of base versions and native modules</a>
+<a href="#changing-base-version">Changing the base version of an app</a>
+<a href="#next-up">Next up</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Base version</div>
+    <p>When you first run the <span class="docs__technical">siphon create</span> command, we
+    automatically assign your app a special value called a <span class="docs__technical">base_version</span>
+    behind the scenes. Open up the file named <span class="docs__technical">Siphonfile</span> in your app's
+    directory to see the currently assigned version.</p>
+    <p>It ties your app to a particular <strong>version of React Native</strong> and also guarantees that a certain set
+    of <strong>native modules</strong> are available (e.g. <span class="docs__technical">react-native-video</span>) to be used
+    within your app's JavaScript code. You don't need to link these native libraries yourself.</p>
+    <p>Every few weeks we add a new base version to the list, which includes new native modules and usually the latest version of React Native.</p>
+    <p><a href="#changing-base-version">Learn how to change the base version</a></p>
+
+    <a name="base-versions"></a>
+    <div class="docs__subheading">List of base versions and native modules</div>
+    <p>
+        <table>
+            <tr><th>Base version</th><th>React Native</th><th>Comments</th></tr>
+            {% for bv in base_versions %}
+            <tr>
+                <td>
+                    {% if bv.latest %}
+                        <strong>{{ bv.name }} (latest)</strong>
+                    {% else %}
+                        {{ bv.name }}
+                    {% endif %}
+                </td>
+                <td>{{ bv.react_native_version }}</td>
+                <td>{{ bv.comment|linebreaksbr }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </p>
+
+    <a name="changing-base-version"></a>
+    <div class="docs__subheading">Changing the base version of an app</div>
+    <p>The <span class="docs__technical">base_version</span> assigned to an app is
+    controlled by the file named <span class="docs__technical">Siphonfile</span> that
+    appears in every Siphon app directory. It uses the JSON format and looks something like this:</p>
+    {% include "docs/snippets/base-version.html" %}
+    <p>To change the base version, edit the
+    <span class="docs__technical">Siphonfile</span> and run a <span class="docs__technical">siphon push</span> to reflect
+    the change.</p>
+    <p>If your app is already published to the App Store or Play Store, you will need to
+    run the <span class="docs__technical">siphon publish</span> command again if you would like to change the base version
+    of your production app.</p>
+
+    <a name="next-up"></a>
+    <div class="docs__subheading">Next up</div>
+    <p>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}">Frequently Asked Questions</a>
+    </p>
+
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/Base version');
+</script>
+{% endblock %}

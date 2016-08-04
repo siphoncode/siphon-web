@@ -1,0 +1,43 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+var React = require(&#x27;react-native&#x27;);
+var {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity
+} = React;
+
+var YouTube = require(&#x27;react-native-youtube&#x27;);
+
+var PlayerView = React.createClass({
+  render: function() {
+    return (
+      &#x3C;View&#x3E;
+        &#x3C;YouTube
+          videoId={this.props.videoID}
+          play={true}
+          hidden={false}
+          playsInline={true}
+          onError={(e) =&#x3E; { alert(e.error) }}
+          style={{
+            alignSelf: &#x27;stretch&#x27;,
+            height: 300,
+            backgroundColor: &#x27;black&#x27;,
+            marginVertical: 10
+          }}
+        /&#x3E;
+        &#x3C;TouchableOpacity
+          onPress={() =&#x3E; this.props.navigator.pop()}&#x3E;
+          &#x3C;Text style={{ color: &#x27;#40b2bf&#x27; }}&#x3E;
+            Close this video
+          &#x3C;/Text&#x3E;
+        &#x3C;/TouchableOpacity&#x3E;
+      &#x3C;/View&#x3E;
+    );
+  }
+});
+
+module.exports = PlayerView;
+</code></pre>
+{% endverbatim %}

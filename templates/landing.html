@@ -1,0 +1,206 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Siphon | Pain-free publishing for React Native{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/landing.scss" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "lib/fancybox-2.1.5/jquery.fancybox.css" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/landing_header.html" %}
+<div class="landing-hero">
+    <!-- Headline -->
+    <span class="landing-hero__headline">Pain-free publishing for React Native.</span>
+    <span class="landing-hero__subheading">Iterate faster with instant over-the-air updates.</span>
+    <div>
+      <a class="landing-hero__signup__button" href="{% url 'accounts:register' %}?from_landing=1">Sign up for free</a>
+      <a class="landing-hero__quickstart__button" href="{% url 'docs:quickstart' %}">Quickstart</a>
+    </div>
+    <!-- Main points -->
+    <div class="landing-hero__points">
+        <div>
+            <div class="landing-hero__point">
+                <div class="landing-hero__point__icon">
+                    <img src="{% static "img/landing/apple-logo.png" %}" width="62" height="77" alt="Apple logo." />
+                </div>
+                <div class="landing-hero__point__text">
+                    <span>Publish to the <strong>App Store</strong> with one command.</span>
+                </div>
+            </div>
+            <div class="landing-hero__point">
+                <div class="landing-hero__point__icon">
+                    <img src="{% static "img/landing/google-play-logo.png" %}" width="65" height="72" alt="Google Play logo." />
+                </div>
+                <div class="landing-hero__point__text">
+                    <span>Publish your app to <strong>Google Play</strong> with one command.</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="landing-hero__point">
+                <div class="landing-hero__point__icon">
+                    <img src="{% static "img/landing/push-updates.png" %}" width="90" height="68" alt="Over-the-air updates." />
+                </div>
+                <div class="landing-hero__point__text">
+                    <span>Push <strong>instant</strong> over-the-air updates to production apps.</span>
+                </div>
+            </div>
+            <div class="landing-hero__point">
+                <a href="{% url 'docs:beta-testing' %}">
+                    <div class="landing-hero__point__icon">
+                        <img src="{% static "img/landing/beta-builds.png" %}" width="73" height="73" alt="Seal icon." />
+                    </div>
+                    <div class="landing-hero__point__text">
+                        <span>Instantly share your app with external beta testers.</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="landing__text__divider"></div> -->
+    <div class="landing-hero__video_container">
+      <a class="landing-hero__video fancybox.iframe" href="https://youtube.com/embed/0Nvnc95CR5w?autoplay=1">
+          <img src="{% static "img/landing/video-preview.png" %}" width="530" height="406" />
+      </a>
+    </div>
+    <div class="landing-bullets">
+        <div>
+            <div class="landing-bullets__bullet__platforms">
+                <div>
+                    <img src="{% static "img/landing/ios-android-icon.png" %}" width="143" height="59" />
+                    <p>A single codebase for your<br /> <strong>iOS</strong> and <strong>Android</strong> app.</p>
+                    <p>Build, run and publish with<br /> the same simple commands.</p>
+                </div>
+            </div>
+            <div class="landing-bullets__bullet__updates">
+                <div>
+                    <img src="{% static "img/landing/updates-icon.png" %}" width="56" height="55" />
+                    <p>Push instant over-the-air <br />updates to <strong>production</strong> apps.</p>
+                    <p>Iterate faster and skip the<br /> App Store approval queue.</p>
+                </div>
+            </div>
+            <div class="landing-bullets__bullet__javascript">
+                <div>
+                    <img src="{% static "img/landing/javascript-icon.png" %}" width="62" height="43" />
+                    <p>Write your app in JavaScript<br /> with React Native.</p>
+                    <p>One consistent developer experience across both platforms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="landing-workflow-section">
+    <div class="landing-workflow-section__graphic">
+        <img src="{% static "img/landing/siphon-create.png" %}" width="328" height="280" />
+        <div class="landing-workflow-section__graphic__subtitle">
+            Your new app appears in the <img src="{% static "img/landing/tiny-logo.png" %}" width="17" height="17" />Siphon Sandbox.
+            Available from the <a href="https://getsiphon.com/i">App Store</a> and <a href="https://getsiphon.com/a">Google Play</a>.
+        </div>
+    </div>
+    <div class="landing-workflow-section__content">
+        <div class="landing-workflow-section__content__headline">
+            Create a native mobile app in 30 seconds.
+        </div>
+        <div class="landing-workflow-section__content__console">
+            <span>$</span> siphon create travel-chat
+        </div>
+        <p>Our sandbox environment lets you create and test React Native apps without
+        installing Xcode or Android Studio.</p>
+        <p>Download the Siphon command-line tool and develop apps on Mac or Linux
+        (Windows support coming soon).</p>
+        <a href="{% url 'docs:quickstart' %}" class="landing-workflow-section__content__button">Start the quickstart tutorial</a>
+    </div>
+</div>
+<div class="landing-workflow-section">
+    <div class="landing-workflow-section__content">
+        <div class="landing-workflow-section__content__headline">
+            Push instant updates to your production apps.
+        </div>
+        <div class="landing-workflow-section__content__console">
+            <span>$</span> siphon push
+        </div>
+        <p>Skip the App Store approval queue for most updates and avoid waiting five days
+        for every change. Keep your hard-earned five star reviews.</p>
+        <p>We use diffs and asset caching to keep updates fast and minimize bandwidth.</p>
+    </div>
+    <div class="landing-workflow-section__graphic">
+        <img class="landing-workflow-section__graphic__push" src="{% static "img/landing/siphon-push.png" %}" width="303" height="291" />
+    </div>
+</div>
+<div class="landing-workflow-section">
+    <div class="landing-workflow-section__graphic">
+        <img class="landing-workflow-section__graphic__play" src="{% static "img/landing/siphon-play.png" %}" width="353" height="463" />
+    </div>
+    <div class="landing-workflow-section__content">
+        <div class="landing-workflow-section__content__headline">
+            Test in the simulator<br /> or your device. One command for both platforms.
+        </div>
+        <div class="landing-workflow-section__content__console">
+            <span>$</span> siphon play
+        </div>
+        <p>The <strong>siphon play</strong> command conveniently wraps
+        the underlying tools in Xcode and the Android SDK to create a simple unified
+        workflow.</p>
+    </div>
+</div>
+<div class="landing-workflow-section">
+    <div class="landing-workflow-section__content">
+        <div class="landing-workflow-section__content__headline">
+            Publish to the<br /> App Store and<br /> Google Play<br /> with ease.
+        </div>
+        <div class="landing-workflow-section__content__console">
+            <span>$</span> siphon publish
+        </div>
+        <p>Type one command, enter a few details and we'll handle the rest. Quit
+        messing around with certificates and provisioning profiles.</p>
+        <a href="{% url 'static:pricing' %}" class="landing-workflow-section__content__button">More about publishing</a>
+    </div>
+    <div class="landing-workflow-section__graphic">
+        <img class="landing-workflow-section__graphic__publish" src="{% static "img/landing/siphon-publish.png" %}" width="338" height="207" />
+        <div class="landing-workflow-section__graphic__subtitle">
+            Easy publishing from the command-line.
+        </div>
+    </div>
+</div>
+<div class="landing-workflow-section">
+    <div class="landing-workflow-section__graphic">
+        <img src="{% static "img/landing/beta-testing-graphic.png" %}" width="328" height="293" />
+        <div class="landing-workflow-section__graphic__subtitle landing-workflow-section__graphic__subtitle-beta-testing">
+            Beta testers can run your app instantly with <img src="{% static "img/landing/tiny-logo.png" %}" width="17" height="17" />Siphon Sandbox.
+        </div>
+    </div>
+    <div class="landing-workflow-section__content">
+        <div class="landing-workflow-section__content__headline">
+            Instantly share your app with beta testers.
+        </div>
+        <div class="landing-workflow-section__content__console">
+            <span>$</span> siphon share
+        </div>
+        <p>Share a preview of your app to external beta testers by email. Send them live updates as you make changes.</p>
+        <p>It's like TestFlight for React Native, but without the approval process.</p>
+        <a href="{% url 'docs:beta-testing' %}" class="landing-workflow-section__content__button">More about beta testing</a>
+    </div>
+</div>
+<div class="landing-pre-footer">
+    <span>Create your first app in 30 seconds.</span>
+    <a href="{% url 'docs:quickstart' %}">Quickstart tutorial</a>
+    <a href="{% url 'docs:chat-app' %}">Build a real-time chat app</a>
+</div>
+
+<!-- Fancybox -->
+{% load staticfiles %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="{% static "lib/fancybox-2.1.5/jquery.fancybox.pack.js" %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.landing-hero__video').fancybox({
+            width: '80%',
+            padding: 0
+        });
+    });
+
+    mixpanel.track('Web: Landing');
+</script>
+{% endblock %}

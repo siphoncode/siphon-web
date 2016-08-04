@@ -1,0 +1,30 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Android | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/announcement.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" with title="announce" %}
+<div class="announcement__content">
+    <h1 class="announcement__headline">Build and submit a cross-platform React Native app in 2-minutes</h1>
+    <div class="announcement__text">
+        <p><a href="{% url 'static:landing' %}">Siphon</a> enables pain-free publishing for React Native apps. Our command-line tool gives you everything you need to create, run and publish apps for both major platforms. You can push <strong>instant over-the-air updates</strong> to your production apps without going through the App Store approval queue.</p>
+
+      <p>Today <a href="https://getsiphon.com/blog/2016/04/22/android-support-has-arrived/">we're releasing support for Android</a>, so we made a quick video to show you how easy it is to publish a standalone app for both iOS and Android:</p>
+    </div>
+
+  <div>
+    <iframe class="announcement__video" src="https://www.youtube.com/embed/-KZaflS-Lk8"></iframe>
+  </div>
+</div>
+<div class="announcement__button_container">
+  <a class="announcement__button" href="{% url 'static:landing' %}">Get started with Siphon</a>
+</div>
+<script type="text/javascript">
+    mixpanel.track('Web: Android launch');
+</script>
+{% endblock %}

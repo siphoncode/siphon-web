@@ -1,0 +1,71 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/dashboard.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" with title="Dashboard" %}
+<div class="dashboard">
+    <div class="dashboard__left">
+        <div id="dashboard-app">
+            <img class="dashboard__empty-spinner" src="/static/img/dashboard/spinner.gif" width="24" height="24" />
+        </div>
+        <div class="dashboard__subheading">Start here</div>
+        <p>
+            <a href="{% url 'docs:quickstart' %}" class="dashboard__button">Quickstart tutorial</a><br />
+            <a href="{% url 'docs:faq' %}" class="dashboard__button">Read the FAQ</a>
+        </p>
+    </div>
+    <div class="dashboard__right">
+        <div class="dashboard__subscription">
+            <div class="dashboard__subheading">Subscription</div>
+            {% with sub=user.paid_subscription %}
+                {% if sub %}
+                    <p>Your subscription for the <strong>{{ sub.plan.name }}</strong> is currently
+                    <strong>{% if sub.cancelled %}cancelled{% elif sub.active %}active{% else %}inactive{% endif %}</strong>.</p>
+                    <p><a target="_blank" href="https://siphon.chargebeeportal.com/portal/login?email={{ user.email }}">Manage your subscription</a></p>
+                {% else %}
+                    <p>There is currently no paid plan associated with your account. To publish to the App Store please purchase one.</p>
+                    <a href="{% url 'static:pricing' %}">Purchase a paid plan</a>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="dashboard__twitter">
+            <a class="twitter-timeline"
+            data-widget-id="600720083413962752"
+            data-screen-name="getsiphon"
+            height="400"
+            href="#"
+            data-chrome="nofooter">
+            </a>
+        </div>
+    </div>
+</div>
+
+{% load staticfiles %}
+<script src="{% static "js/dashboard-bundle.js" %}"></script>
+<script type="text/javascript">
+    mixpanel.track('Web: Dashboard');
+</script>
+<!-- Twitter widgets -->
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+{% endblock %}

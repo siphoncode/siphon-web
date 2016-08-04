@@ -1,0 +1,81 @@
+
+@import 'includes/mixins';
+@import 'includes/buttons';
+@import 'includes/responsive';
+
+//##############################################################################
+// Content
+//##############################################################################
+
+$spacing: 34px;
+
+.announcement__content {
+    color: #5d5d5d;
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 45px;
+
+    & a {
+        @include font('semibold');
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    @include mobile-only {
+        width: 90%;
+        padding-top: 20px;
+    }
+}
+
+.announcement__headline {
+    @include font('semibold');
+    color: #5d5d5d;
+    font-size: 30px;
+    margin-bottom: $spacing;
+}
+
+.announcement__text {
+    color: #5d5d5d;
+    font-size: 25px;
+    margin-bottom: $spacing + 30px;
+
+    @include mobile-only {
+        margin-bottom: 20px;
+    }
+}
+
+.announcement__video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  height: 360px;
+  border: 3px solid #cccccc;
+
+  @include mobile-only {
+      width: 85%;
+  }
+}
+
+.announcement__button_container {
+  width: 100%;
+  text-align: center;
+}
+
+.announcement__button {
+  @include basic-button(#ffffff, #3a87c0, #3a87c0);
+  margin-top: 65px;
+  margin-bottom: 65px;
+  margin-right: 30px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  @include mobile-only {
+      display: block;
+      max-width: 240px;
+      margin: 0 auto;
+      margin-top: 24px;
+  }
+}

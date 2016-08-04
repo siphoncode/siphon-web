@@ -1,0 +1,9 @@
+Thanks for your submission. Your app is currently being built, packaged and signed ready to be submitted to the Play Store.
+
+You will receive an email shortly when your app is available in the Google Play Developer Console. You then will be able to provide any additional metadata that is required by Google (e.g. screenshots) and approve your app for final submission to the Play Store.
+
+If you have any queries, please don't hesitate to get in touch or reply to this email.
+
+Best wishes,
+
+The Siphon Team

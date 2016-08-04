@@ -1,0 +1,17 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+componentDidMount: function() {
+  this.ws = new WebSocket(&#x27;wss://siphon-chat.herokuapp.com&#x27;);
+  this.ws.onmessage = function(event) {
+    if (event.data != &#x27;ping&#x27;) {
+      this.setState({
+        messages: [event.data].concat(this.state.messages)
+      });
+    }
+  }.bind(this);
+  this.ws.onerror = function() {
+    console.log(&#x27;WebSocket error: &#x27;, arguments);
+  };
+},
+</code></pre>
+{% endverbatim %}

@@ -1,0 +1,417 @@
+
+@import 'includes/mixins';
+@import 'includes/buttons';
+@import 'includes/responsive';
+
+$index-width: 18%;
+$sidebar-width: 20%;
+$content-width: 100% - $index-width - $sidebar-width;
+
+$general-side-spacing: 30px;
+$general-edge-spacing: 24px;
+$general-bottom-spacing: 12px;
+
+$sidebar-spacing: 18px;
+$sidebar-heading-font-size: 19px;
+$sidebar-link-font-size: 18px;
+$content-spacing: 34px;
+
+$content-sidebar-top-spacing: 60px;
+
+// Special case: footer should be flush with content div.
+.footer {
+    margin: 0;
+}
+
+.docs {
+    @include clearfix;
+    color: #4d4d4d;
+
+    & > div {
+        padding-bottom: 40px;
+    }
+
+    table {
+        border: 1px solid #cdcbcb;
+        font-size: 0.9em;
+        width: 100%;
+        text-align: left;
+
+        & th {
+            background-color: #f0f0f0;
+            white-space: nowrap;
+        }
+
+        & th, td {
+            vertical-align: top;
+            padding: 12px;
+            border-right: 1px solid #dbdada;
+        }
+
+        & tr {
+            border-bottom: 1px solid #dbdada;
+        }
+
+        & tr:last-child {
+            border-bottom: none;
+        }
+
+        & th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+
+        & td:last-child {
+            width: 100%;
+        }
+    }
+
+    ul > li {
+        padding: 6px;
+    }
+}
+
+//##############################################################################
+// Index
+//##############################################################################
+
+.docs__responsive-index {
+    display: none;
+    border-top: 1px solid #dddddd;
+
+    @include mobile-only {
+        display: block;
+
+        & > .docs__index {
+            display: block;
+            float: none;
+            width: 100%;
+            padding-bottom: 30px;
+        }
+    }
+
+    & > .docs__subheading {
+        padding-left: 20px;
+        padding-top: 20px;
+        margin: 0;
+    }
+}
+
+.docs__index {
+    @include box-sizing;
+    padding-top: 24px;
+    width: $index-width;
+    float: left;
+    padding-left: $general-edge-spacing;
+    padding-right: $general-side-spacing;
+    padding-bottom: $general-bottom-spacing;
+
+    & > span {
+        @include font('semibold');
+        font-size: $sidebar-heading-font-size;
+        color: #5d5d5d;
+        margin-top: 26px;
+        display: block;
+    }
+
+    & > span:first-child {
+        margin-top: 0;
+    }
+
+    & > a {
+        font-size: $sidebar-link-font-size;
+        color: #888888;
+        display: block;
+        padding-top: 16px;
+    }
+
+    & > a:hover {
+        opacity: 0.7;
+    }
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+//##############################################################################
+// Sidebar
+//##############################################################################
+
+.docs__sidebar {
+    @include box-sizing;
+    padding-top: $content-sidebar-top-spacing;
+    width: $sidebar-width;
+    float: right;
+    padding-bottom: $general-bottom-spacing;
+    padding-right: $general-edge-spacing;
+    padding-left: $general-side-spacing;
+
+    @include mobile-only {
+        display: none;
+    }
+}
+
+.docs__sidebar__contents {
+    & > span {
+        @include font('semibold');
+        font-size: $sidebar-heading-font-size;
+        color: #5d5d5d;
+    }
+
+    & > a {
+        @include font('semibold');
+        font-size: $sidebar-link-font-size;
+        display: block;
+        margin-top: 12px;
+        border-top: 1px solid #dddddd;
+        padding-top: 10px;
+    }
+
+    & > a:hover {
+        opacity: 0.7;
+    }
+}
+
+.docs__sidebar__section {
+    margin-top: 46px;
+
+    & > span {
+        font-size: $sidebar-heading-font-size;
+    }
+
+    & a {
+        font-size: $sidebar-link-font-size;
+        display: block;
+        margin-top: $sidebar-spacing;
+    }
+}
+
+.docs__sidebar__video {
+    margin-top: $sidebar-spacing;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    & > img {
+        border-radius: 6px;
+    }
+}
+
+//##############################################################################
+// Content
+//##############################################################################
+
+.docs__content {
+    @include box-sizing;
+    padding-top: $content-sidebar-top-spacing;
+    font-size: 19px;
+    width: $content-width;
+    float: left;
+    padding-left: $general-side-spacing + 10px;
+    padding-right: $general-side-spacing + 10px;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+
+    & p {
+        margin: 0;
+        display: block;
+        margin-top: 20px;
+    }
+
+    @include mobile-only {
+        width: 100%;
+        border: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+}
+
+.docs__headline {
+    @include font('semibold');
+    color: #5d5d5d;
+    font-size: 32px;
+    margin-bottom: $content-spacing;
+}
+
+.docs__subheading {
+    @include font('light');
+    color: #5d5d5d;
+    font-size: 31px;
+    margin-top: $content-spacing + 8px;
+    margin-bottom: $content-spacing;
+}
+
+.docs__technical {
+    background-color: #e3e3e3;
+    font-family: 'Monaco', monospace;
+    font-weight: normal;
+    font-size: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    position: relative;
+    border-radius: 4px;
+    top: -1px;
+    border: 1px solid #d6d6d6;
+}
+
+.docs__code {
+    background-color: #edf1f3;
+    font-family: 'Monaco', monospace;
+    font-weight: bold;
+    font-size: 14px;
+    color: #575757;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 11px;
+    padding-right: 11px;
+    border-radius: 6px;
+    border: 1px solid #d2d2d2;
+    margin-top: 26px;
+    line-height: 24px;
+
+    & > span {
+        @include not-selectable;
+        color: #b2b2b2;
+    }
+}
+
+.docs__code-sublink {
+    font-size: 0.8em;
+    padding-top: 18px;
+}
+
+.docs__content__button {
+    @include basic-button(#2ab498, #2ab498);
+    font-size: 19px;
+}
+
+.docs__content__next-buttons {
+    & > a {
+        margin-left: 14px;
+    }
+
+    & > a:first-child {
+        margin-left: 0;
+    }
+}
+
+.docs__content__next-button {
+    @include basic-button(#186dcc, #3486ec);
+    font-size: 19px;
+
+    @include mobile-only {
+        display: block;
+        margin-left: 0 !important;
+        margin-top: 8px;
+    }
+}
+
+.docs__content__big-link {
+    @include font('semibold');
+    display: inline-block;
+    margin-top: 20px;
+    border: 1px solid #d6d6d6;
+    padding: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 6px;
+
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.docs__content__screenshot {
+    display: block;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 625px;
+}
+
+.docs__content__push-changes-image {
+    @include box-sizing;
+    margin-top: $content-spacing;
+    padding: 6px;
+    background-color: #4c4c4c;
+    border-radius: 6px;
+
+    & > img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.docs__content__create-app-image {
+    float: left;
+    padding-right: 35px;
+    padding-bottom: 20px;
+}
+
+.docs__content__chat-ui-image {
+    display: block;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+//##############################################################################
+// Help section
+//##############################################################################
+
+.docs__content__help-section {
+    @include box-sizing;
+    display: inline-block;
+    margin-top: $content-spacing;
+    border: 1px solid #d6d6d6;
+    border-left: 6px solid #d6d6d6;
+    border-radius: 6px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 2px;
+    padding-right: 8px;
+    font-size: 0.86em;
+
+    & > span {
+        padding-left: 7px;
+        display: block;
+        color: #6e6e6e;
+    }
+
+    & > a {
+        padding-left: 7px;
+        display: block;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    .docs__technical {
+        top: auto;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+}
+
+.docs__content__react-native-blurb {
+    font-size: 0.86em;
+    margin-top: 12px;
+    width: 100%;
+    padding-bottom: 14px;
+    color: #7b7b7b;
+    display: block;
+    padding-left: 6px;
+}

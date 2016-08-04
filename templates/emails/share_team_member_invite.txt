@@ -1,0 +1,19 @@
+
+Hello,
+
+A user of Siphon ({{ team_leader_username }}) has invited you to become a team member for the app "{{ app_name }}".
+
+** Accept the invite: {{ accept_url }}
+
+---------------------------
+
+The team leader should now provide you with instructions on how to obtain the source code for the app. We recommend using a version control system such as Git for this purpose. Please read our overview of team sharing for more details:
+
+** How to use team sharing: {{ team_sharing_url }}
+
+Please note that only *you* will be able to see changes that you push to the shared app. When you're satisfied with your local changes, you should merge them with your team's source code, for example using Git. Only the team leader can publish a shared app.
+
+---------------------------
+
+https://getsiphon.com
+Support: hello@getsiphon.com

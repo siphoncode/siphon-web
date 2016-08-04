@@ -1,0 +1,9 @@
+Thanks for your submission. Your app is currently being built, packaged and signed ready to be submitted to the App Store.
+
+You will receive an email shortly when your app is available in iTunes Connect. You then will be able to provide any additional metadata that is required by Apple (e.g. screenshots) and approve your app for final submission to the App Store.
+
+If you have any queries, please don't hesitate to get in touch or reply to this email.
+
+Best wishes,
+
+The Siphon Team

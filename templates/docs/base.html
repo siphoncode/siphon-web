@@ -1,0 +1,41 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/docs.scss" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "lib/prismjs/prism.css" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" with title="Docs" %}
+<div class="docs">
+    {% include "docs/includes/index.html" %}
+    <div class="docs__content">
+        {% block docs_content %}{% endblock %}
+    </div>
+    <div class="docs__sidebar">
+        <div class="docs__sidebar__contents">
+            <span>Table of contents</span>
+            {% block docs_toc %}{% endblock %}
+        </div>
+        <div class="docs__sidebar__section">
+            <span>Watch the video</span>
+            <a class="docs__sidebar__video" href="https://www.youtube.com/watch?v=0Nvnc95CR5w" target="_blank">
+                <img src="{% static "img/docs/video-thumb.png" %}" width="182" height="119" />
+            </a>
+        </div>
+        <div class="docs__sidebar__section">
+            <span>Learn more</span>
+            <a href="{% url 'docs:quickstart' %}">Quickstart</a>
+            <a href="{% url 'docs:faq' %}">Read the FAQ</a>
+            <a href="{% url 'docs:faq' %}#native-modules">Native modules</a>
+            <a href="{% url 'docs:base-version' %}">All about base versions</a>
+        </div>
+    </div>
+</div>
+<div class="docs__responsive-index">
+    <div class="docs__subheading">More docs</div>
+    {% include "docs/includes/index.html" %}
+</div>
+<script src="{% static "lib/prismjs/prism.js" %}"></script>
+{% endblock %}

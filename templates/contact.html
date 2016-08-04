@@ -1,0 +1,19 @@
+{% extends "includes/base.html" %}
+{% load static %}
+
+{% block title %}Contact us | Siphon{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/contact.scss" %}" />
+{% endblock %}
+
+{% block content %}
+{% include "includes/header.html" with title="Contact us" %}
+<div class="contact-us">
+    <span class="contact-us__headline">Get in touch for support, feedback, partnerships or any other enquiries.</span>
+    <span class="contact-us__content"><a href="mailto:hello@getsiphon.com">hello@getsiphon.com</a> / +44 (0) 20 8133 4487</span>
+</div>
+<script type="text/javascript">
+    mixpanel.track('Web: Contact us');
+</script>
+{% endblock %}

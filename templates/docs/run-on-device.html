@@ -1,0 +1,69 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}How to run a React Native app on your device | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#install-cli">Install the command-line client</a>
+<a href="#create-siphon-account">Create a Siphon account</a>
+<a href="#create-app">Create an app</a>
+<a href="#run-on-device">Run the app on your device</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">How to run a React Native app on your device</div>
+    <p>We're going to show you how to quickly create a React Native app and run it on
+    your iPhone with <a href="https://getsiphon.com">Siphon</a>. You will need a Mac to follow this tutorial.</p>
+    <p>Our command-line tool walks you through all the steps required to provision
+    your device and download any missing dependencies. You don't need to open
+    Xcode or even run the React Native packager.</p>
+    <p style="color: #aaaaaa">For now we only support iOS for running an app on your device. Android support is coming soon.</p>
+
+    <a name="install-cli"></a>
+    <div class="docs__subheading">Install the command-line client</div>
+    <p>To get started with Siphon you will need to download our lightweight command-line tool. Paste the following command into a terminal window:</p>
+    <div class="docs__code"><span>$ </span>curl https://getsiphon.com/install.sh | sh</div>
+    <p>The installer script will take a few seconds to complete. Once that's done, check that the tool is working:</p>
+    <div class="docs__code"><span>$ </span>siphon --help</div>
+    <div class="docs__content__help-section">
+        <a href="http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line" target="_blank">Read a beginners guide to using the terminal</a>
+    </div>
+
+    <a name="create-siphon-account"></a>
+    <div class="docs__subheading">Create a Siphon account</div>
+    <p>If you don't have one yet, you will need to quickly create a Siphon account. This is where your apps will be stored.</p>
+    <p><a class="docs__content__button" href="{% url 'accounts:register' %}" target="_blank">Create a free account</a></p>
+    <p>It only takes a few moments. Come back to this page when you're finished.</p>
+
+    <a name="create-app"></a>
+    <div class="docs__subheading">Create an app</div>
+    <p>We're going to need an app to run on the device. The command-line tool can
+    make us a simple template app in one step.</p>
+    <p>Navigate to a suitable directory (anywhere is fine) and type the following
+    command to create a new app:</p>
+    <div class="docs__code"><span>$ </span>siphon create my-app</div>
+    <p>You can name the app anything you like. The tool creates a new directory with same name.</p>
+
+    <a name="run-on-device"></a>
+    <div class="docs__subheading">Run the app on your device</div>
+    <p>First, make sure your iPhone is plugged in to your machine with a USB cable. You're going
+    to need an <a href="https://developer.apple.com/support/compare-memberships/">Apple Developer</a>
+    account to run a development app on your device.</p>
+    <p>Type the following into your terminal:</p>
+    <div class="docs__code">
+        <span>$ </span>cd my-app<br />
+        <span>$ </span>siphon play
+    </div>
+    <p><strong>That's it!</strong> The tool is going to walk you through all of the required steps needed to
+    prepare your machine and provision your device.</p>
+    <div class="docs__content__help-section">
+        <span>
+            You can also run the app on your local machine using the iOS simulator by typing
+            in <span class="docs__technical">siphon develop</span>. <a href="{% url 'docs:quickstart' %}">Learn more</a> about
+            the available Siphon commands.
+        </span>
+    </div>
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/Device');
+</script>
+{% endblock %}

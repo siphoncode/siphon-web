@@ -1,0 +1,164 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Quickstart | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#install-cli">Install the command-line client</a>
+<a href="#download-sandbox">Download and run the Siphon Sandbox app</a>
+<a href="#create-app">Create your first app</a>
+<a href="#push-changes">Push some changes to your app</a>
+<a href="#running-in-the-simulator">Running your app in the simulator</a>
+<a href="#beta-testing">Sharing your app with beta testers</a>
+<a href="#publishing">Publishing your app</a>
+<a href="#next-up">Next up</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Quickstart</div>
+    <p>Siphon is primarily a command-line tool. This quickstart tutorial will
+    walk you through the installation process and then describe all
+    of the ways that you can interact with the service.</p>
+
+    <a name="install-cli"></a>
+    <div class="docs__subheading">Install the command-line client</div>
+    <p>To get started with Siphon you will need to download our lightweight command-line tool. Paste the following command into a terminal window:</p>
+    <div class="docs__code"><span>$ </span>curl https://getsiphon.com/install.sh | sh</div>
+    <p>The installer script will take a few seconds to complete. Once that's done, check that the tool is working:</p>
+    <div class="docs__code"><span>$ </span>siphon --help</div>
+    <div class="docs__content__help-section">
+        <a href="http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line" target="_blank">Read a beginners guide to using the terminal</a>
+    </div>
+
+    <a name="download-sandbox"></a>
+    <div class="docs__subheading">Download and run the Siphon Sandbox app</div>
+    <p>One way to run apps is by installing the Siphon Sandbox app onto your device. Open up your phone's browser and type in <thead>
+      the following address if it's an <strong>iPhone</strong>:</thead></p>
+    <div>
+      <a class="docs__content__big-link" href="https://getsiphon.com/i">getsiphon.com/i</a>
+    </div>
+    <p>Or, if it's an <strong>Android</strong> device:</p>
+    <div>
+      <a class="docs__content__big-link" href="https://getsiphon.com/a">getsiphon.com/a</a>
+    </div>
+    <p>Once that's done, login with your Siphon account. No account yet?</p>
+    <p><a class="docs__content__button" href="{% url 'accounts:register' %}?from_tutorial=1">Create a free account</a></p>
+    <p>You can also use the <span class="docs__technical">siphon play</span> command to run your apps in the simulator. More on that below.</p>
+    <div class="docs__content__help-section">
+        <span>You can run both iOS and Android apps through our sandbox app. Android simulator support
+        is coming soon.</span>
+    </div>
+
+    <a name="create-app"></a>
+    <div class="docs__subheading">Create your first app</div>
+    <img class="docs__content__create-app-image" src="{% static "img/docs/quickstart/create-app.png" %}" width="251" height="213" />
+    <p>Navigate to a suitable directory (anywhere is fine) and type the following
+    command to create a new app:</p>
+    <div class="docs__code" style="display: inline-block;"><span>$ </span>siphon create my-app</div>
+    <div class="docs__code-sublink">
+        <a href="{% url 'docs:existing-react-native-app' %}">How do I convert an existing React Native app?</a>
+    </div>
+    <p>You can name the app anything you like. The tool creates a new directory with same name.</p>
+    <div>
+        <p>The new directory contains a simple React Native template app. Once the command finishes
+        running, the new app is going to appear in the Siphon Sandbox.</p>
+        <p>Next, <strong>tap on the icon</strong> to start the app; it's going to load over-the-air.</p>
+    </div>
+
+    <a name="push-changes"></a>
+    <div class="docs__subheading">Push some changes to your app</div>
+    <p>Now let's try making some changes. Navigate into the newly created
+    directory and open up <span class="docs__technical">index.js</span> in
+    your favourite editor.</p>
+    <p>Change some of the template text within the <span class="docs__technical">&#x3C;Text&#x3E;</span> tag and save the file.</p>
+    <div class="docs__content__push-changes-image">
+        <img src="{% static "img/docs/quickstart/push-changes.gif" %}" width="753" height="289" />
+    </div>
+    <div class="docs__content__react-native-blurb">
+        <span>Siphon apps are powered by React Native under the hood. Learn more <br />about it here:
+        <a href="http://www.toptal.com/ios/cold-dive-into-react-native-a-beginners-tutorial" target="_blank">React Native: A Beginner's Tutorial</a></span>
+    </div>
+    <p>Next, push your changes with the command-line tool:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon push
+    </div>
+    <p>The app should now automatically reload on the phone and display your changes. Instead of typing in this
+    command for every change, you can also use the tool to <strong>watch</strong> your app for changes:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon push --watch
+    </div>
+    <p>Every time you save a change to one of your app's files, the tool will push those changes automatically. This
+    makes the process of developing your app much more pleasant.</p>
+    <p>To stream logs and errors from your app as it runs in the sandbox, you can use the
+    <span class="docs__technical">siphon logs</span> command.
+    <div class="docs__content__help-section">
+        <span>
+            The app directory works like a typical Node.js project directory; you can install <br />
+            suitable third-party modules using <span class="docs__technical">npm install</span>
+            and the command-line tool will push the <span class="docs__technical">node_modules</span> directory and bundle it with your app.
+        </span>
+    </div>
+
+    <a name="running-in-the-simulator"></a>
+    <div class="docs__subheading">Running your app in the simulator</div>
+    <p>If you're using a Mac, there's a way to run your app in the iOS simulator. Navigate to your app directory
+    and type in:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon develop
+    </div>
+    <p>The tool will prompt you to install Xcode and any other necessary components that you haven't already
+    installed on your local machine.</p>
+    <p>It will then build and run your project as a standalone app in the simulator
+    while running the React Native packager in the background (so you get the benefits of
+    <a href="https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html">Hot Reloading</a>).</p>
+    <p>You can specify other simulator types like this:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon develop --simulator ipad2
+    </div>
+    <p style="color:#aaaaaa">Soon you will also be able to run your app in the Android emulator, but for
+    now you should use the <a href="/a">sandbox</a>.</p>
+    <div class="docs__content__help-section">
+        <span>To run an app on your developer device you should use
+        <a href="{% url 'docs:run-on-device' %}">siphon play</a>.</span>
+    </div>
+
+    <a name="beta-testing"></a>
+    <div class="docs__subheading">Sharing your app with beta testers</div>
+    <p>Before publishing an app it can be useful to send it to beta testers so that they can give you feedback.
+    Simply specify an email address and we will send them an invitation
+    to beta test your app:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon share someone@domain.com
+    </div>
+    <p>No approval is required and the recipient will be prompted to create a
+    Siphon account if they do not already have one. The user will see a special read-only copy of your app and
+    you can instantly send them <a href="{% url 'docs:beta-testing' %}#sharing-changes">changes</a> as often
+    as you like.</p>
+    <p><a href="{% url 'docs:beta-testing' %}">Learn more about beta testing</a></p>
+
+    <a name="publishing"></a>
+    <div class="docs__subheading">Publishing your app</div>
+    <p>When you're finished working on an app, you can publish it by typing in one command:</p>
+    <div class="docs__code">
+        <span>$ </span>siphon publish --platform ios
+    </div>
+    <p>You will be prompted to enter some basic information about your app, like a description and some keywords.</p>
+    <p>Behind-the-scenes we will build, sign, package and submit an app binary on your behalf.</p>
+    <p><a href="{% url 'docs:faq' %}#publishing">Read more about how publishing works</a></p>
+    <div class="docs__content__help-section">
+        <span>
+            Publishing to the App Store and Google Play requires a
+            <a href="{% url 'static:pricing' %}">paid subscription</a>.
+        </span>
+    </div>
+
+    <a name="next-up"></a>
+    <div class="docs__subheading">Next up</div>
+    <p class="docs__content__next-buttons">
+        <a class="docs__content__next-button" href="{% url 'docs:chat-app' %}">Build a real-time chat app</a>
+        <a class="docs__content__next-button" href="{% url 'docs:faq' %}">FAQs</a>
+    </p>
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/Quickstart');
+</script>
+{% endblock %}

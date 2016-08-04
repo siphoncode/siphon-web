@@ -1,0 +1,20 @@
+{% verbatim %}
+<pre><code class="language-jsx">
+&#x27;use strict&#x27;;
+
+var React = require(&#x27;react-native&#x27;);
+var {
+  AppRegistry
+} = React;
+
+var VideoListView = require(&#x27;./components/VideoListView&#x27;);
+
+var App = React.createClass({
+  render: function() {
+    return &#x3C;VideoListView playlistID=&#x22;PLF76F25F55798FDBC&#x22; /&#x3E;;
+  }
+});
+
+AppRegistry.registerComponent(&#x27;App&#x27;, () =&#x3E; App);
+</code></pre>
+{% endverbatim %}

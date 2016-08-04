@@ -1,0 +1,49 @@
+{% extends "docs/base.html" %}
+{% load static %}
+
+{% block title %}Team sharing | Siphon Docs{% endblock %}
+
+{% block docs_toc %}
+<a href="#version-control">Version control</a>
+<a href="#siphon-accounts">Siphon accounts</a>
+<a href="#add-team-member">Adding a new team member</a>
+{% endblock %}
+
+{% block docs_content %}
+    <div class="docs__headline">Team sharing</div>
+    <p>It's common to develop a mobile app in a team environment. Below we define a set of recommended guidelines for team development using Siphon.</p>
+    <p>These are only guidelines so a different workflow may make more sense for your team. For example, you may decide to share the same Siphon account with all team members.</p>
+    <p>We also support a <a href="#add-team-member">special variant</a> of the <span class="docs__technical">siphon share</span> command that makes it easier for your team to collaborate from a single codebase.</p>
+    <div class="docs__content__help-section">
+        <span>In the future we may introduce more complex team sharing features, such as the ability to assign publishing privileges to a team member.</span>
+    </div>
+
+    <a name="version-control"></a>
+    <div class="docs__subheading">Version control</div>
+    <p>Siphon is designed to be completely separate from your chosen version control system (e.g. Git) so that you are free to choose your own tools and workflow.</p>
+    <p>To collaborate in a team, we strongly recommend committing all of your Siphon app's files to version control, except for the <span class="docs__technical">node_modules</span> directory (in most cases).</p>
+    <p>You should also commit the hidden <span class="docs__technical">.siphon</span> file to your repository as it allows the command-line tool to keep track of your app's unique <span class="docs__technical">app_id</span>. Below we describe a command for sharing a single <span class="docs__technical">app_id</span> between team members.</p>
+
+    <a name="siphon-accounts"></a>
+    <div class="docs__subheading">Siphon accounts</div>
+    <p>Your company should have a primary Siphon account (we call this the <strong>team leader</strong>) which is signed up for a <a href="{% url 'static:pricing' %}">paid subscription</a>.</p>
+    <p>Each <strong>team member</strong> will have their own separate account for development purposes.</p>
+
+    <a name="add-team-member"></a>
+    <div class="docs__subheading">Adding a new team member</div>
+    <p>While logged in as the <strong>team leader</strong> you can share your app with a new <strong>team member</strong> with by entering one command:</p>
+    <div class="docs__code"><span>$ </span>siphon share someone@domain.com --team</div>
+    <p>An email invitation will be sent and the recipient will be prompted to create a Siphon account if they do not already have one.</p>
+    <p>If the team member accepts the invite, they will start to see a special copy of the original app in their <a href="/a">Siphon Sandbox</a> app and in their dashboard.</p>
+    <p>At this point, the team member should clone your app's source code from your chosen source control system (e.g. Git). From now on the team member can run <span class="docs__technical">siphon push</span> with the exact same <span class="docs__technical">.siphon</span> file as your original app and Siphon will route it correctly behind-the-scenes.</p>
+    <p>In other words, they can clone your source code repository on their local machine, login with their own seperate Siphon account and push directory from the cloned app directory.</p>
+    <p>When the team member runs <span class="docs__technical">siphon push</span> the command-line tool pushes their local files to a special internal app that is only visible in the team member's account. The changes will not be pushed to anyone else on the team. They can test their changes in the sandbox, simulator or device.</p>
+    <p>When a team member is ready to share these changes with the rest of the team, they should <strong>merge in those changes through version control</strong>. A team member can not share their changes using the command-line tool.</p>
+    <div class="docs__content__help-section">
+        <span>At this time, a team member can not publish a team app. The team leader is responsible for publishing.</span>
+    </div>
+
+<script type="text/javascript">
+    mixpanel.track('Web: Docs/Team sharing');
+</script>
+{% endblock %}
